@@ -246,12 +246,9 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="banner-content-two">
-                            <span class="sub-title" data-aos="fade-up" data-aos-delay="0">ما در این زمینه متخصص
-                                هستیم</span>
-                            <h2 class="title" data-aos="fade-up" data-aos-delay="300">یک راه هوشمند برای کسب و کار
-                                خود پیدا کنید</h2>
-                            <p data-aos="fade-up" data-aos-delay="500">فارس کد به شما کمک می‌کند تا داده‌های خود را به
-                                یک دارایی استراتژیک و ذهن‌ساز بینش تجاری درجه یک تبدیل کنید.</p>
+                            <span class="sub-title" data-aos="fade-up" data-aos-delay="0">آراز دیوار</span>
+                            <h2 class="title" data-aos="fade-up" data-aos-delay="300">آراز دیوار</h2>
+                            <p data-aos="fade-up" data-aos-delay="500">این یه سایتیه که شبیه دیوار هست</p>
                             <div class="banner-btn">
                                 <a href="services.html" class="btn" data-aos="fade-right"
                                     data-aos-delay="700">خدمات ما</a>
@@ -284,39 +281,19 @@
                 <h2 class="title">لیست دسته بندی ها</h2>
                 <div class="features-item-wrap">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="features-item-two">
-                                <div class="features-icon-two">
-                                    <i class="flaticon-profit"></i>
-                                </div>
-                                <div class="features-content-two">
-                                    <h4 class="title">کسب و کار</h4>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="features-item-two">
-                                <div class="features-icon-two">
-                                    <i class="flaticon-investment"></i>
-                                </div>
-                                <div class="features-content-two">
-                                    <h4 class="title">طراحی سایت</h4>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ.</p>
+                        @foreach ($categories as $item)
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="features-item-two">
+                                    <div class="features-icon-two">
+                                        <i class="flaticon-profit"></i>
+                                    </div>
+                                    <div class="features-content-two">
+                                        <h4 class="title">{{ $item->name }}</h4>
+                                        <p>{{ $item->description }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="features-item-two">
-                                <div class="features-icon-two">
-                                    <i class="flaticon-taxes"></i>
-                                </div>
-                                <div class="features-content-two">
-                                    <h4 class="title">سئو و تولید محتوا</h4>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ.</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

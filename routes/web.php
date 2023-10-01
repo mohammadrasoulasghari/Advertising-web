@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\indexController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [indexController::class, 'index']);
+
+// Route::get('test', function () {
+//     dd(Category::all());
+// });
