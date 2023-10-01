@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\indexController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\indexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [indexController::class, 'index']);
+// Route::get('/admin', [adminController::class, 'indexPage']);
+Route::group(['prefix' => '/admin'], function () {
+                 Route::get('/index', [adminController::class, 'indexPage']);
+});
 
 // Route::get('test', function () {
 //     dd(Category::all());
