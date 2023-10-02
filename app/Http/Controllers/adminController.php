@@ -41,6 +41,7 @@ class adminController extends Controller
     public function showEditAdverstingPage(Request $request, Advertising $adversting)
     {
         $adversting = Advertising::find($adversting->id);
-        return view('panel-admin.adversting.edit-adversting', compact('adversting'));
+        $categories = Category::all();
+        return view('panel-admin.adversting.edit-adversting', compact('adversting', 'categories'));
     }
 }

@@ -58,6 +58,8 @@
                                                     </h3>
                                                     <p class="text-muted"><i class="mdi mdi-pin me-5"></i>icon:
                                                         {{ $item->icon }}</p>
+                                                    <p class="text-muted"><i class="mdi mdi-pin me-5"></i>icon:
+                                                        {{ $item->category_id }}</p>
                                                     <p class="text-muted mb-0">توضیحات:{{ $item->description }}</p>
                                                 </div>
                                                 <a href="{{ route('showEditAdverstingPage', $item->id) }}">

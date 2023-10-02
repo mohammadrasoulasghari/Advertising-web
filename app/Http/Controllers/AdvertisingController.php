@@ -11,8 +11,9 @@ class AdvertisingController extends Controller
     {
         Advertising::create($request->all());
     }
-    public function update(Request $request)
+    public function update(Request $request, Advertising $advertising)
     {
-        dd($request);
+        $advertising->update($request->all());
+        return redirect(route('index.page'));
     }
 }

@@ -37,7 +37,7 @@ Route::group(['prefix' => '/admin'], function () {
                  // delete adversting
                  // edit adversting
                  Route::get('/edit-adversting/{adversting}', [adminController::class, 'showEditAdverstingPage'])->name('showEditAdverstingPage');
-                 Route::post('/update-adversting/{adversting}', [AdvertisingController::class, 'showEditAdverstingPage'])->name('update.adversting');
+                 Route::post('/update-adversting/{advertising}', [AdvertisingController::class, 'update'])->name('update.adversting');
                  // // edit adversting
 
 });
