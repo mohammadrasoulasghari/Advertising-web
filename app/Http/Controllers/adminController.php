@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -12,6 +13,12 @@ class adminController extends Controller
     }
     public function addCategory()
     {
-        return view('panel-admin.add-category');
+        $categories = Category::all();
+        return view('panel-admin.add-category', compact('categories'));
+    }
+    public function ShowdeletePage()
+    {
+        $categories = Category::all();
+        return view('panel-admin.delete-category', compact('categories'));
     }
 }

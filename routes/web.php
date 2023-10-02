@@ -3,6 +3,7 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\indexController;
 
 /*
@@ -19,9 +20,19 @@ use App\Http\Controllers\indexController;
 Route::get('/', [indexController::class, 'index']);
 // Route::get('/admin', [adminController::class, 'indexPage']);
 Route::group(['prefix' => '/admin'], function () {
-                 Route::get('/index', [adminController::class, 'indexPage']);
+                 Route::get('/index', [adminController::class, 'indexPage'])->name('index.page');
+
+                 //  create category
+                 Route::get('/add-category', [adminController::class, 'addCategory'])->name('add.category');
+                 Route::post('/create-category', [CategoryController::class, 'store'])->name('store.category');
+                 //  create category
+
+                 // delete category
+                 Route::get('/delete-category', [adminController::class, 'ShowdeletePage'])->name('delete.category');
+                 Route::get('/create-category/{id}', [CategoryController::class, 'storeDelete'])->name('store.delete.category');
+                 // delete category
 });
 
-// Route::get('test', function () {
-//     dd(Category::all());
-// });
+Route::get('test', function () {
+                 return view('panel-admin.delete-category');
+});

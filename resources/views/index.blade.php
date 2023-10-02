@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>جیرو - قالب شرکتی Html</title>
+    <title>شرکت آراز دیوار</title>
     <meta name="description" content="Gerow - Business Consulting HTML Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,7 +47,7 @@
                     <div class="col-lg-7">
                         <div class="header-top-left">
                             <ul class="list-wrap">
-                                <li><i class="flaticon-location"></i>شیراز بلوار چمران - هتل چمران</li>
+                                <li><i class="flaticon-location"></i>تهران سعادت آباد</li>
                                 <li><i class="flaticon-mail"></i><a href="mailto:test@test.com">test@test.com</a></li>
                             </ul>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="menu-wrap">
                             <nav class="menu-nav">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo"></a>
+                                    {{-- <a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo"></a> --}}
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
@@ -275,31 +275,9 @@
         </section>
         <!-- banner-area-end -->
 
-        <!-- features-area -->
-        <section class="features-area-two pt-80">
-            <div class="container">
-                <h2 class="title">لیست دسته بندی ها</h2>
-                <div class="features-item-wrap">
-                    <div class="row justify-content-center">
-                        @foreach ($categories as $item)
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="features-item-two">
-                                    <div class="features-icon-two">
-                                        <i class="flaticon-profit"></i>
-                                    </div>
-                                    <div class="features-content-two">
-                                        <h4 class="title">{{ $item->name }}</h4>
-                                        <p>{{ $item->description }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-        <!-- features-area-end -->
+        <!-- categories-area -->
+        <x-show-category :categories="$categories"></x-show-category>
+        <!-- categories-area-end -->
 
 
 
