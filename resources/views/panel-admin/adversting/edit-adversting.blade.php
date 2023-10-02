@@ -65,8 +65,7 @@
                                     <h4 class="box-title">فرم نمونه </h4>
                                 </div>
                                 <!-- /.box-header -->
-                                <form class="form" action="{{ route('update.category', $category->id) }}"
-                                    method="POST">
+                                <form class="form" action="" method="POST">
                                     @csrf
                                     <div class="box-body">
                                         <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>اطلاعات
@@ -75,15 +74,15 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">نام دسته بندی</label>
-                                                    <input type="text" value="{{ $category->name }}" name="name"
-                                                        class="form-control" placeholder="نام دسته بندی">
+                                                    <label class="form-label">نام محصول</label>
+                                                    <input type="text" value="{{ $adversting->name }}" name="name"
+                                                        class="form-control" placeholder="نام محصول">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">توضیحات</label>
-                                                    <input type="text" value="{{ $category->description }}"
+                                                    <input type="text" value="{{ $adversting->description }}"
                                                         name="description" class="form-control" placeholder="توضیحات">
                                                 </div>
                                             </div>
@@ -92,15 +91,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">slug</label>
-                                                    <input type="text" value="{{ $category->slug }}" name="slug"
+                                                    <input type="text" value="{{ $adversting->slug }}" name="slug"
                                                         class="form-control" placeholder="slug">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">icon</label>
-                                                    <input type="text" value="{{ $category->icon }}" name="icon"
-                                                        class="form-control" placeholder="icon">
                                                 </div>
                                             </div>
                                         </div>

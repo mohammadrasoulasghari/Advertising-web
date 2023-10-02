@@ -23,7 +23,7 @@ class adminController extends Controller
         $categories = Category::all();
         return view('panel-admin.category.delete-category', compact('categories'));
     }
-    public function showEditPage(Request $request, Category $category)
+    public function showEditCategoryPage(Request $request, Category $category)
     {
         $category = Category::find($category->id);
         return view('panel-admin.category.edit-category', compact('category'));
@@ -33,9 +33,14 @@ class adminController extends Controller
         $categories = Category::all();
         return view('panel-admin.adversting.add-adversting', compact('categories'));
     }
-    public function showEditAdverstingPage()
+    public function showDeleteAdverstingPage()
     {
-        $adversting = Adversting::all();
-        return view('panel-admin.adversting.edit-adversting');
+        $adversting = Advertising::all();
+        return view('panel-admin.adversting.delete-adversting', compact('adversting'));
+    }
+    public function showEditAdverstingPage(Request $request, Advertising $adversting)
+    {
+        $adversting = Advertising::find($adversting->id);
+        return view('panel-admin.adversting.edit-adversting', compact('adversting'));
     }
 }

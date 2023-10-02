@@ -41,15 +41,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('index.page') }}">
+                        <a href="{{ route('add.adversting') }}">
                             <i data-feather="list"></i>
-                            <span>لیست آگهی ها</span>
+                            <span>افزودن آگهی</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('showEditAdverstingPage') }}">
+                        <a href="{{ route('showDeleteAdverstingPage') }}">
                             <i data-feather="list"></i>
-                            <span>لیست آگهی ها</span>
+                            <span>ویرایش آگهی</span>
                         </a>
                     </li>
                     <li>
@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('delete.category') }}">
+                        <a href="{{ route('edit.category') }}">
                             <i data-feather="award"></i>
                             <span>ویرایش دسته بندی ها</span>
                         </a>

@@ -11,4 +11,8 @@ class AdvertisingController extends Controller
     {
         Advertising::create($request->all());
     }
+    public function update(Request $request)
+    {
+        dd($request);
+    }
 }

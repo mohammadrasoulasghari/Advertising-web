@@ -62,7 +62,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h4 class="box-title">فرم نمونه </h4>
+                                    <h4 class="box-title">فرم ویرایش دسته بندی</h4>
                                 </div>
                                 <!-- /.box-header -->
                                 <form class="form" action="{{ route('update.category', $category->id) }}"
