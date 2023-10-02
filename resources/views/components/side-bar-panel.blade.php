@@ -47,6 +47,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('showEditAdverstingPage') }}">
+                            <i data-feather="list"></i>
+                            <span>لیست آگهی ها</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('add.category') }}">
                             <i data-feather="grid"></i>
                             <span>افزودن دسته بندی</span>
@@ -55,7 +61,7 @@
                     <li>
                         <a href="{{ route('delete.category') }}">
                             <i data-feather="award"></i>
-                            <span>حذف دسته بندی</span>
+                            <span>ویرایش دسته بندی ها</span>
                         </a>
                     </li>
                     <li>

@@ -24,13 +24,20 @@
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
 
+
+
     <div class="wrapper">
         <div id="loader"></div>
 
         <x-header>
         </x-header>
-
         <x-side-bar-panel></x-side-bar-panel>
+
+        @if (session('alert'))
+            <div class="alert alert-success">
+                {{ session('alert') }}
+            </div>
+        @endif
 
         <div class="content-wrapper">
             <div class="container-full">
@@ -46,23 +53,25 @@
                                             <div class="property-bx p-20">
                                                 <div>
                                                     <h5 class="text-success mt-0 mb-20">480,000 - 530,000</h5>
-                                                    <h3 class="mt-0"><a
-                                                            href="{{ route('store.delete.category', $item->id) }}"
+                                                    <h3 class="mt-0"><a href=""
                                                             class="text-primary">{{ $item->name }}</a>
                                                     </h3>
-                                                    <p class="text-muted"><i class="mdi mdi-pin me-5"></i>ولیعصر - زرتشت
-                                                        غربی</p>
-                                                    <p class="text-muted mb-0">توضیحات تستی</p>
+                                                    <p class="text-muted"><i class="mdi mdi-pin me-5"></i>icon:
+                                                        {{ $item->icon }}</p>
+                                                    <p class="text-muted mb-0">توضیحات:{{ $item->description }}</p>
                                                 </div>
-                                                <div class="mt-15 fs-18">
-                                                    <a href="#" title="Square Feet" class="me-15"><i
-                                                            class="mdi mdi-view-dashboard me-10"></i><span>158</span></a>
-                                                    <a href="#" title="Bedroom" class="me-15"><i
-                                                            class="mdi mdi-hotel me-10"></i><span>4</span></a>
-                                                    <a href="#" title="Parking space" class="me-15"><i
-                                                            class="mdi mdi-car-taxi me-10"></i><span>2</span></a>
-                                                    <a href="#" title="Garages" class="me-15"><i
-                                                            class="mdi mdi-home me-10"></i><span> 24H</span></a>
+                                                <div class="clearfiX">
+                                                    <a href="{{ route('store.delete.category', $item->id) }}">
+                                                        <button type="submit"
+                                                            class="bg-gradient-danger waves-effect waves-light">حذف این
+                                                            دسته
+                                                            بندی</button>
+                                                    </a>
+                                                    <a href="{{ route('showEditPage', $item->id) }}">
+                                                        <button type="submit"
+                                                            class="bg-gradient-warning waves-effect waves-light">ویرایش
+                                                            این دسته بندی</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

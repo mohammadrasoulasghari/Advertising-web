@@ -3,8 +3,9 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\indexController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,27 @@ Route::group(['prefix' => '/admin'], function () {
                  Route::get('/add-category', [adminController::class, 'addCategory'])->name('add.category');
                  Route::post('/create-category', [CategoryController::class, 'store'])->name('store.category');
                  //  create category
+                 // delete category
+                 Route::get('/delete-category', [adminController::class, 'ShowdeleteCategoryPage'])->name('delete.category');
+                 Route::get('/create-category/{category}', [CategoryController::class, 'storeDelete'])->name('store.delete.category');
+                 // delete category
+                 // edit category
+                 Route::get('/edit-category/{category}', [adminController::class, 'showEditPage'])->name('showEditPage');
+                 Route::post('/update-category/{category}', [CategoryController::class, 'update'])->name('update.category');
+                 // edit category
 
-                 // delete category
-                 Route::get('/delete-category', [adminController::class, 'ShowdeletePage'])->name('delete.category');
-                 Route::get('/create-category/{id}', [CategoryController::class, 'storeDelete'])->name('store.delete.category');
-                 // delete category
+                 // ===================================
+
+                 // create adversting
+                 Route::get('/add-adversting', [adminController::class, 'addAdversting'])->name('add.adversting');
+                 Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
+                 // create adversting
+
+                 // edit category
+                 Route::get('/edit-adversting', [adminController::class, 'showEditAdverstingPage'])->name('showEditAdverstingPage');
+                 // Route::post('/update-category/{category}', [CategoryController::class, 'update'])->name('update.category');
+                 // // edit category
+
 });
 
 Route::get('test', function () {

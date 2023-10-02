@@ -39,40 +39,33 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
-                        <div class="col-xl-12 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-12">
-                                            <img class="img-thumbnail img-fluid"
-                                                src="{{ asset('images/property/p1.jpg') }}" alt="img">
-                                        </div>
-                                        <div class="col-lg-8 col-12">
-                                            <div class="property-bx p-20">
-                                                <div>
-                                                    <h5 class="text-success mt-0 mb-20">480,000 - 530,000</h5>
-                                                    <h3 class="mt-0"><a href="#" class="text-primary">تهران</a>
-                                                    </h3>
-                                                    <p class="text-muted"><i class="mdi mdi-pin me-5"></i>ولیعصر -
-                                                        زرتشت غربی</p>
-                                                    <p class="text-muted mb-0">توضیحات تستی</p>
-                                                </div>
-                                                <div class="mt-15 fs-18">
-                                                    <a href="#" title="زیر بنا" class="me-15"><i
-                                                            class="mdi mdi-view-dashboard me-10"></i><span>158</span></a>
-                                                    <a href="#" title="اتاق خواب" class="me-15"><i
-                                                            class="mdi mdi-hotel me-10"></i><span>4</span></a>
-                                                    <a href="#" title="فضای پارکینگ" class="me-15"><i
-                                                            class="mdi mdi-car-taxi me-10"></i><span>2</span></a>
-                                                    <a href="#" title="انباری" class="me-15"><i
-                                                            class="mdi mdi-home me-10"></i><span> 24H</span></a>
+                        @foreach ($adversting as $item)
+                            <div class="col-xl-12 col-12">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-12">
+                                                <img class="img-thumbnail img-fluid"
+                                                    src="{{ asset('images/property/p1.jpg') }}" alt="img">
+                                            </div>
+                                            <div class="col-lg-8 col-12">
+                                                <div class="property-bx p-20">
+                                                    <div>
+                                                        <h5 class="text-success mt-0 mb-20">480,000 - 530,000</h5>
+                                                        <h3 class="mt-0"><a href="#"
+                                                                class="text-primary">{{ $item->name }}</a>
+                                                        </h3>
+
+                                                        <p class="text-muted mb-0">{{ $item->description }}</p>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                 </section>
 
 
