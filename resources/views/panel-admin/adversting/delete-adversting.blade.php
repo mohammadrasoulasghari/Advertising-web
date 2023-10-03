@@ -62,6 +62,12 @@
                                                         {{ $item->category_id }}</p>
                                                     <p class="text-muted mb-0">توضیحات:{{ $item->description }}</p>
                                                 </div>
+                                                <a href="{{ route('store.delete.advertising', $item->id) }}">
+                                                    <button type="submit"
+                                                        class="bg-gradient-danger waves-effect waves-light">حذف این
+                                                        دسته
+                                                        بندی</button>
+                                                </a>
                                                 <a href="{{ route('showEditAdverstingPage', $item->id) }}">
                                                     <button type="submit"
                                                         class="bg-gradient-warning waves-effect waves-light">ویرایش

@@ -33,6 +33,7 @@ Route::group(['prefix' => '/admin'], function () {
                  // create adversting
                  // delete adversting
                  Route::get('/delete-adversting', [adminController::class, 'showDeleteAdverstingPage'])->name('showDeleteAdverstingPage');
+                 Route::get('/delete-advertising/{advertising}', [AdvertisingController::class, 'storeDelete'])->name('store.delete.advertising');
 
                  // delete adversting
                  // edit adversting

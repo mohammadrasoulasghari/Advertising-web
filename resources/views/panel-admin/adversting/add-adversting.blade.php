@@ -62,7 +62,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h4 class="box-title">فرم نمونه </h4>
+                                    <h4 class="box-title">فرم افزودن محصولات در سایت آراز دیوار</h4>
                                 </div>
                                 <!-- /.box-header -->
                                 <form class="form" action="{{ route('store.adversting') }}" method="POST">
@@ -76,7 +76,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">نام محصول</label>
                                                     <input type="text" name="name" class="form-control"
-                                                        placeholder="نام دسته بندی">
+                                                        placeholder="نام محصول">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -99,14 +99,14 @@
                                                 <div class="form-group">
                                                     <label class="form-label">شماره تلفن</label>
                                                     <input type="text" name="phone_number" class="form-control"
-                                                        placeholder="icon">
+                                                        placeholder="شماره تلفن:">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">آدرس تصویر شما</label>
                                                     <input type="text" name="picture_url" class="form-control"
-                                                        placeholder="icon">
+                                                        placeholder="لطفا آدرس تصویر خود را وارد کنید">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
