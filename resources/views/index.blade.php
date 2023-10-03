@@ -62,9 +62,18 @@
                                     <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="header-top-btn">
-                                <a href="contact.html"><i class="flaticon-briefcase"></i>مشاوره رایگان</a>
-                            </div>
+                            @if ($user_info)
+                                <div class="header-top-btn">
+                                    <a href="{{ route('profile.index') }}"><i
+                                            class="flaticon-briefcase"></i>{{ $user_info }} خوش
+                                        آمدید</a>
+                                </div>
+                            @else
+                                <div class="header-top-btn">
+                                    <a href="{{ route('login') }}"><i>وارد حساب کاربری خود
+                                            شوید!</i></a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -336,7 +345,7 @@
                                         </ul>
                                     </div>
                                     <div class="pricing-btn-two">
-                                        <a href="contact.html" class="btn">فعال سازی این طرح</a>
+                                        <a href="" class="btn">فعال سازی این طرح</a>
                                     </div>
                                 </div>
                             </div>
