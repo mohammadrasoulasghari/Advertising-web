@@ -7,7 +7,8 @@
                     <img src="{{ asset('images/avatar/1.jpg') }}" class="avatar avatar-xxxl box-shadowed" alt="User Image">
                 </div>
                 <div class="info mt-20">
-                    <a class="dropdown-toggle px-20" data-bs-toggle="dropdown" href="#">{{ $user->name }}</a>
+                    <a class="dropdown-toggle px-20" data-bs-toggle="dropdown" href="#">{{ $user->name }} عزیز
+                        وقتت بخیر</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#"><i class="ti-user"></i>پروفایل</a>
                         <a class="dropdown-item" href="#"><i class="ti-email"></i>صندوق ورودی</a>

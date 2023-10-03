@@ -65,8 +65,7 @@
                                     <h4 class="box-title">فرم نمونه </h4>
                                 </div>
                                 <!-- /.box-header -->
-                                <form class="form" action="{{ route('update.adversting', $adversting->id) }}"
-                                    method="POST">
+                                <form class="form" action="{{ route('update.user', $user->id) }}" method="POST">
                                     @csrf
                                     <div class="box-body">
                                         <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>اطلاعات
@@ -76,49 +75,31 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">نام محصول</label>
-                                                    <input type="text" value="{{ $adversting->name }}" name="name"
+                                                    <input type="text" value="{{ $user->name }}" name="name"
                                                         class="form-control" placeholder="نام محصول">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">توضیحات</label>
-                                                    <input type="text" value="{{ $adversting->description }}"
-                                                        name="description" class="form-control" placeholder="توضیحات">
+                                                    <label class="form-label">ایمیل</label>
+                                                    <input type="text" value="{{ $user->email }}" name="description"
+                                                        class="form-control" placeholder="ایمیل">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">شماره تلفن</label>
-                                                    <input type="text" value="{{ $adversting->phone_number }}"
+                                                    <label class="form-label">تاریخ ایجاد:</label>
+                                                    <input type="text" value="{{ $user->created_at }}"
                                                         name="phone_number" class="form-control"
                                                         placeholder="شماره تلفن">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">slug</label>
-                                                    <input type="text" value="{{ $adversting->slug }}" name="slug"
+                                                    <label class="form-label">سطح دسترسی:</label>
+                                                    <input type="text" value="{{ $user->permission }}" name="slug"
                                                         class="form-control" placeholder="slug">
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">ویرایش آدرس عکس</label>
-                                                    <input type="text" value="{{ $adversting->picture_url }}"
-                                                        name="picture_url" class="form-control" placeholder="slug">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="">دسته بندی خود را ویرایش کنید</label>
-                                                <select name="category_id" class="col-md-6 form-control select2"
-                                                    style="">
-                                                    {{-- <option selected="selected">یکی از موارد زیر را انتخاب کنید</option> --}}
-                                                    @foreach ($categories as $item)
-                                                        <option value="{{ $item->id }}"> {{ $item->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
                                             </div>
                                         </div>
 

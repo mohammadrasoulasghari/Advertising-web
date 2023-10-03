@@ -114,7 +114,11 @@
                                                 <li><a href="blog-details.html">برگه تکی وبلاگ</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">تماس با ما</a></li>
+                                        @if ($user_info)
+                                            <li><a href="{{ route('logout') }}">خارج شدن</a></li>
+                                        @else
+                                            <li><a href="{{ route('register') }}">حسابی ندارید؟ ثبت نام کنید</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="header-action">

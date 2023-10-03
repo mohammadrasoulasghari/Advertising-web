@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
+<body class="hold-transition blue-skin sidebar-mini theme-primary fixed rtl">
 
     <div class="wrapper">
         <div id="loader"></div>

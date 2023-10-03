@@ -35,9 +35,9 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">منو</li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="{{ route('list.users') }}">
                             <i data-feather="compass"></i>
-                            <span>داشبورد</span>
+                            <span>لیست کاربران </span>
                         </a>
                     </li>
                     <li>

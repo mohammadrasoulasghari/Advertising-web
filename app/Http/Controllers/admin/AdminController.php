@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Advertising;
 use App\Models\Category;
+use App\Models\Advertising;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 
-class adminController extends Controller
+class AdminController extends Controller
 {
     public function indexPage()
     {
@@ -43,5 +45,15 @@ class adminController extends Controller
         $adversting = Advertising::find($adversting->id);
         $categories = Category::all();
         return view('panel-admin.adversting.edit-adversting', compact('adversting', 'categories'));
+    }
+    public function listUsers()
+    {
+        $users = User::all();
+        return view('panel-admin.users.list-users', compact('users'));
+    }
+    public function showEditUsersPage(User $user)
+    {
+        $user = User::find($user->id);
+        return view('panel-admin.users.edit-users', compact('user'));
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Advertising;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdvertisingController extends Controller
 {
@@ -23,4 +24,5 @@ class AdvertisingController extends Controller
         $advertising->delete();
         return redirect(route('showDeleteAdverstingPage'))->with('alert', 'برند شما با موفقیت افزوده شد');
     }
+    
 }

@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckPermissionAdmin;
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\AdvertisingController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,42 +25,57 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [indexController::class, 'index']);
 // Route::get('/admin', [adminController::class, 'indexPage']);
-Route::group(['prefix' => '/admin'], function () {
-                 Route::get('/index', [adminController::class, 'indexPage'])->name('index.page');
+Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(function () {
+                 Route::get('/index', [AdminController::class, 'indexPage'])->name('index.page');
 
                  //  create category
-                 Route::get('/add-category', [adminController::class, 'addCategory'])->name('add.category');
+                 Route::get('/add-category', [AdminController::class, 'addCategory'])->name('add.category');
                  Route::post('/create-category', [CategoryController::class, 'store'])->name('store.category');
                  //  create category
                  // show delete and delete category
-                 Route::get('/delete-category', [adminController::class, 'ShowdeleteCategoryPage'])->name('edit.category');
+                 Route::get('/delete-category', [AdminController::class, 'ShowdeleteCategoryPage'])->name('edit.category');
                  Route::get('/delete-category/{category}', [CategoryController::class, 'storeDelete'])->name('store.delete.category');
                  // show delete and  delete category
                  // edit category
-                 Route::get('/edit-category/{category}', [adminController::class, 'showEditCategoryPage'])->name('showEditPage');
+                 Route::get('/edit-category/{category}', [AdminController::class, 'showEditCategoryPage'])->name('showEditPage');
                  Route::post('/update-category/{category}', [CategoryController::class, 'update'])->name('update.category');
                  // edit category
 
                  // ===================================
 
                  // create adversting
-                 Route::get('/add-adversting', [adminController::class, 'addAdversting'])->name('add.adversting');
+                 Route::get('/add-adversting', [AdminController::class, 'addAdversting'])->name('add.adversting');
                  Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
                  // create adversting
                  // delete adversting
-                 Route::get('/delete-adversting', [adminController::class, 'showDeleteAdverstingPage'])->name('showDeleteAdverstingPage');
+                 Route::get('/delete-adversting', [AdminController::class, 'showDeleteAdverstingPage'])->name('showDeleteAdverstingPage');
                  Route::get('/delete-advertising/{advertising}', [AdvertisingController::class, 'storeDelete'])->name('store.delete.advertising');
 
                  // delete adversting
                  // edit adversting
-                 Route::get('/edit-adversting/{adversting}', [adminController::class, 'showEditAdverstingPage'])->name('showEditAdverstingPage');
+                 Route::get('/edit-adversting/{adversting}', [AdminController::class, 'showEditAdverstingPage'])->name('showEditAdverstingPage');
                  Route::post('/update-adversting/{advertising}', [AdvertisingController::class, 'update'])->name('update.adversting');
                  // // edit adversting
 
+                 // list for users
+
+                 // show
+                 Route::get('/list-users', [AdminController::class, 'listUsers'])->name('list.users');
+                 // show
+
+                 // delete
+                 Route::get('/delete-users/{user}', [UserController::class, 'delete'])->name('delete.users');
+                 // delete
+
+                 // edit user
+                 Route::get('/edit-user/{user}', [AdminController::class, 'showEditUsersPage'])->name('showEditPage');
+                 Route::post('/update-user/{user}', [UserController::class, 'update'])->name('update.user');
+                 // // edit user
 });
-// Route::prefix('/user', function () {
-//                  Route::get('/index',);
-// });
+
+
+Route::prefix('/user-panel', function () {
+});
 
 Route::get('/dashboard', function () {
                  return view('dashboard');
