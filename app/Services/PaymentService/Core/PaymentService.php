@@ -1,6 +1,8 @@
 <?php
 
-use App\Services\PaymentService\Core\interfaces\PaymentInterface;
+namespace App\Services\PaymentService\Core;
+
+
 
 class PaymentService
 {
@@ -11,5 +13,6 @@ class PaymentService
                  }
                  public function pay($amount, $factorNumber)
                  {
+                                  $this->paymentDriver->send($amount, $factorNumber);
                  }
 }

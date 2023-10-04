@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Services\PaymentService\Drivers;
+
+use App\Services\PaymentService\Core\interfaces\Payment;
 use Illuminate\Support\Facades\Http;
 
 class PayDriver implements Payment
@@ -11,9 +14,9 @@ class PayDriver implements Payment
                                                    'amount'       => $amount,
                                                    'redirect'     => route('checkout.verify'),
                                                    'factorNumber' => $factorNumber,
-                                                   'description'  => '',
                                   ]);
                                   $result = $result->json();
+                                  dd($result);
                                   if ($result->status) {
                                                    $go = "https://pay.ir/pg/$result->token";
                                                    header("Location: $go");
