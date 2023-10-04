@@ -47,9 +47,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('showDeleteAdverstingPage') }}">
+                        <a href="{{ route('edit.profile') }}">
                             <i data-feather="list"></i>
-                            <span>ویرایش آگهی</span>
+                            <span>ویرایش پروفایل</span>
                         </a>
                     </li>
                     <li>

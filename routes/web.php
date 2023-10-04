@@ -8,6 +8,7 @@ use App\Http\Middleware\CheckPermissionAdmin;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\AdvertisingController;
+use App\Http\Controllers\order\CheckOutController;
 use App\Http\Controllers\user\AdvertisinfUserController;
 
 /*
@@ -20,6 +21,11 @@ use App\Http\Controllers\user\AdvertisinfUserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
+
 
 
 Route::get('/', [indexController::class, 'index']);
@@ -98,7 +104,15 @@ Route::middleware('auth')->group(function () {
                  Route::get('/advertising/{advertising}', [AdvertisinfUserController::class, 'destroy'])->name('advertising.destroy');
                  // delete advertising
 
+                 // Edit User Profile
+                 Route::get('/edit-profile', [UserController::class, 'editProfile'])->name('edit.profile');
+                 Route::post('update-profile-user/{user}', [UserController::class, 'updateProfile'])->name('update.profile');
+                 // Edit User Profile 
 
+                 Route::get('/checkout', [CheckOutController::class, 'checkOut'])->name('checkout');
+                 Route::post('/checkout', [CheckOutController::class, 'pay']);
+
+                 Route::get('/checkout/verify', [CheckOutController::class, 'verify'])->name('checkout.verify');
 });
 
 
