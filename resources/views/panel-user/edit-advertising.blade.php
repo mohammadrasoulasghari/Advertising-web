@@ -30,7 +30,7 @@
         <x-header>
         </x-header>
 
-        <x-side-bar-panel></x-side-bar-panel>
+        <x-side-bar-user :user='$user'></x-side-bar-user>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -62,58 +62,58 @@
                         <div class="col-lg-12 col-12">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h4 class="box-title">فرم افزودن محصولات در سایت آراز دیوار</h4>
+                                    <h4 class="box-title">فرم نمونه </h4>
                                 </div>
                                 <!-- /.box-header -->
-                                <form class="form" action="{{ route('store.adversting') }}" method="POST">
+                                <form class="form" action="{{ route('update.user.adversting', $adversting->id) }}"
+                                    method="POST">
                                     @csrf
                                     <div class="box-body">
-                                        <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>فرم افزودن
-                                            آگهی</h4>
+                                        <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>اطلاعات
+                                            شخصی</h4>
                                         <hr class="my-15">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">نام محصول</label>
-                                                    <input type="text" name="name" class="form-control"
-                                                        placeholder="نام محصول">
+                                                    <input type="text" value="{{ $adversting->name }}" name="name"
+                                                        class="form-control" placeholder="نام محصول">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">توضیحات</label>
-                                                    <input type="text" name="description" class="form-control"
-                                                        placeholder="توضیحات">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">slug</label>
-                                                    <input type="text" name="slug" class="form-control"
-                                                        placeholder="slug">
+                                                    <input type="text" value="{{ $adversting->description }}"
+                                                        name="description" class="form-control" placeholder="توضیحات">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">شماره تلفن</label>
-                                                    <input type="text" name="phone_number" class="form-control"
-                                                        placeholder="شماره تلفن:">
+                                                    <input type="text" value="{{ $adversting->phone_number }}"
+                                                        name="phone_number" class="form-control"
+                                                        placeholder="شماره تلفن">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">آدرس تصویر شما</label>
-                                                    <input type="text" name="picture_url" class="form-control"
-                                                        placeholder="لطفا آدرس تصویر خود را وارد کنید">
+                                                    <label class="form-label">slug</label>
+                                                    <input type="text" value="{{ $adversting->slug }}" name="slug"
+                                                        class="form-control" placeholder="slug">
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="">لطفا دسته بندی آگهی خود را انتخاب کنید</label>
-                                                <select name="category_id" class="form-control select2"
-                                                    style="width: 100%;">
-                                                    <option selected="selected">یگی از موارد زیر را انتخاب کنید</option>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">ویرایش آدرس عکس</label>
+                                                    <input type="text" value="{{ $adversting->picture_url }}"
+                                                        name="picture_url" class="form-control" placeholder="slug">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="">دسته بندی خود را ویرایش کنید</label>
+                                                <select name="category_id" class="col-md-6 form-control select2"
+                                                    style="">
+                                                    {{-- <option selected="selected">یکی از موارد زیر را انتخاب کنید</option> --}}
                                                     @foreach ($categories as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->name }}
                                                         </option>
@@ -121,16 +121,20 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="user_id" value="{{ $user_id }}">
+
                                         <button type="submit">submit</button>
                 </section>
                 <!-- /.content -->
+
             </div>
         </div>
 
 
 
 
+        <!-- Control Sidebar -->
+        <x-side-bar-panel></x-side-bar-panel>
+        <!-- /.control-sidebar -->
 
         <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>

@@ -32,8 +32,9 @@ class AdminController extends Controller
     }
     public function addAdversting()
     {
+        $user_id = auth()->user()->id;
         $categories = Category::all();
-        return view('panel-admin.adversting.add-adversting', compact('categories'));
+        return view('panel-admin.adversting.add-adversting', compact('categories', 'user_id'));
     }
     public function showDeleteAdverstingPage()
     {
@@ -44,7 +45,8 @@ class AdminController extends Controller
     {
         $adversting = Advertising::find($adversting->id);
         $categories = Category::all();
-        return view('panel-admin.adversting.edit-adversting', compact('adversting', 'categories'));
+        $user_id = auth()->user()->id;
+        return view('panel-admin.adversting.edit-adversting', compact('adversting', 'categories', 'user_id'));
     }
     public function listUsers()
     {

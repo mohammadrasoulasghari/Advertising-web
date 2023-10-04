@@ -35,13 +35,13 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">منو</li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="{{ route('advertising.show.list') }}">
                             <i data-feather="compass"></i>
-                            <span>داشبورد</span>
+                            <span>لیست آگهی ها</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('add.adversting') }}">
+                        <a href="{{ route('advertising.create') }}">
                             <i data-feather="list"></i>
                             <span>افزودن آگهی</span>
                         </a>

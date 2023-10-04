@@ -8,8 +8,7 @@ use App\Http\Middleware\CheckPermissionAdmin;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\AdvertisingController;
-
-
+use App\Http\Controllers\user\AdvertisinfUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,17 +73,36 @@ Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(functi
 });
 
 
-Route::prefix('/user-panel', function () {
+
+Route::middleware('auth')->group(function () {
+                 // index
+                 Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
+                 // index
+
+                 // crete advertising for user 
+                 Route::get('/advertising/create', [AdvertisinfUserController::class, 'create'])->name('advertising.create');
+                 Route::post('/create-adversting', [AdvertisinfUserController::class, 'store'])->name('store.adversting.user');
+                 // crete advertising for user
+
+                 // Show Advertising and delete , edit button
+                 Route::get('/list-advertising', [AdvertisinfUserController::class, 'show'])->name('advertising.show.list');
+                 // Show Advertising and delete , edit button
+
+                 // edit adversting 
+                 Route::get('/edit-advertising/{advertising}', [UserController::class, 'edit'])->name('advertising.update');
+                 Route::post('update-advertising-user/{advertising}', [AdvertisinfUserController::class, 'update'])->name('update.user.adversting');
+                 // edit adversting 
+
+
+                 // delete advertising
+                 Route::get('/advertising/{advertising}', [AdvertisinfUserController::class, 'destroy'])->name('advertising.destroy');
+                 // delete advertising
+
+
 });
 
+
+require __DIR__ . '/auth.php';
 Route::get('/dashboard', function () {
                  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-                 Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
-                 // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-                 // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__ . '/auth.php';

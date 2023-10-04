@@ -12,6 +12,7 @@ class indexController extends Controller
     {
         $categories = Category::all();
         $user_info = auth()->user()?->name;
-        return view('index', compact('categories', 'user_info'));
+        $user = auth()->user();
+        return view('index', compact('categories', 'user_info', 'user'));
     }
 }

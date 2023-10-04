@@ -30,7 +30,8 @@
         <x-header>
         </x-header>
 
-        <x-side-bar-panel></x-side-bar-panel>
+        <x-side-bar-user :user='$user'></x-side-bar-user>
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -65,7 +66,7 @@
                                     <h4 class="box-title">فرم افزودن محصولات در سایت آراز دیوار</h4>
                                 </div>
                                 <!-- /.box-header -->
-                                <form class="form" action="{{ route('store.adversting') }}" method="POST">
+                                <form class="form" action="{{ route('store.adversting.user') }}" method="POST">
                                     @csrf
                                     <div class="box-body">
                                         <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>فرم افزودن

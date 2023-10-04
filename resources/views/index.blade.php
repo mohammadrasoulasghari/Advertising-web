@@ -48,7 +48,8 @@
                         <div class="header-top-left">
                             <ul class="list-wrap">
                                 <li><i class="flaticon-location"></i>تهران سعادت آباد</li>
-                                <li><i class="flaticon-mail"></i><a href="mailto:test@test.com">test@test.com</a></li>
+                                <li><i class="flaticon-mail"></i><a href="mailto:test@test.com">test@test.com</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
