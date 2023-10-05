@@ -99,7 +99,7 @@
                                                 <li><a href="index-5.html">کسب و کار</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('') }}">مشاهده همه پست ها</a></li>
+                                        <li><a href="{{ route('showAdvertisings') }}">مشاهده همه پست ها</a></li>
                                         <li class="menu-item-has-children"><a href="#">برگه ها</a>
                                             <ul class="sub-menu">
                                                 <li><a href="services.html">خدمات ما</a></li>

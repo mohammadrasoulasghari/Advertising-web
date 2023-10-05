@@ -10,6 +10,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\AdvertisingController;
 use App\Http\Controllers\order\CheckOutController;
 use App\Http\Controllers\user\AdvertisinfUserController;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,3 +122,8 @@ require __DIR__ . '/auth.php';
 Route::get('/dashboard', function () {
                  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/email', function () {
+                 Mail::to('mohammadrasoulasghari1@gmail.com')->send(new VerifyEmail);
+});

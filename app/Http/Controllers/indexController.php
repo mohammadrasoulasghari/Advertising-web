@@ -20,8 +20,8 @@ class indexController extends Controller
     }
     public function showAdvertisings(Request $request)
     {
-
-        $advertisings = Advertising::all();
+        $filters = $request->only('search');
+        $advertisings = Advertising::filterr($filters)->get();
         return view('show-advertisings', compact('advertisings'));
     }
 }
