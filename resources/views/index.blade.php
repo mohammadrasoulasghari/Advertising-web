@@ -99,7 +99,7 @@
                                                 <li><a href="index-5.html">کسب و کار</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="about.html">درباره ما</a></li>
+                                        <li><a href="{{ route('') }}">مشاهده همه پست ها</a></li>
                                         <li class="menu-item-has-children"><a href="#">برگه ها</a>
                                             <ul class="sub-menu">
                                                 <li><a href="services.html">خدمات ما</a></li>
@@ -324,100 +324,45 @@
                         <span class="tab-btn annual_tab_title">سالانه</span>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 col-sm-10">
-                            <div class="pricing-box-two">
-                                <div class="pricing-head-two">
-                                    <h4 class="title">طرح پایه</h4>
-                                    <div class="pricing-price-two">
-                                        <h2 class="price monthly_price">19000<strong>تومان</strong></h2>
-                                        <h2 class="price annual_price">119000<strong>تومان</strong></h2>
+                        @foreach ($plans as $plan)
+                            <div class="col-lg-4 col-md-6 col-sm-10">
+                                <div class="pricing-box-two">
+                                    <div class="pricing-head-two">
+                                        <h4 class="title">{{ $plan->name }}</h4>
+                                        <div class="pricing-price-two">
+                                            <h2 class="price monthly_price">{{ $plan->price }}<strong>تومان</strong>
+                                            </h2>
+                                            <h2 class="price annual_price">119000<strong>تومان</strong></h2>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="pricing-bottom">
-                                    <div class="pricing-list">
-                                        <ul class="list-wrap">
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">5000 کاربر
-                                                فعال</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی
-                                                نامحدود</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بدون شارژ
-                                                مخفی</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بکاپ
-                                                روزانه</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی به
-                                                سورس فایل</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">و ...</li>
-                                        </ul>
-                                    </div>
-                                    <div class="pricing-btn-two">
-                                        <a href="" class="btn">فعال سازی این طرح</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10">
-                            <div class="pricing-box-two">
-                                <span class="popular">پیشنهادی</span>
-                                <div class="pricing-head-two">
-                                    <h4 class="title">طرح تیمی</h4>
-                                    <div class="pricing-price-two">
-                                        <h2 class="price monthly_price">49000<strong>تومان</strong></h2>
-                                        <h2 class="price annual_price">499000<strong>تومان</strong></h2>
-                                    </div>
-                                </div>
-                                <div class="pricing-bottom">
-                                    <div class="pricing-list">
-                                        <ul class="list-wrap">
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">5000 کاربر
-                                                فعال</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی
-                                                نامحدود</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بدون شارژ
-                                                مخفی</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بکاپ
-                                                روزانه</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی به
-                                                سورس فایل</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">و ...</li>
-                                        </ul>
-                                    </div>
-                                    <div class="pricing-btn-two">
-                                        <a href="contact.html" class="btn">فعال سازی این طرح</a>
+                                    <div class="pricing-bottom">
+                                        <div class="pricing-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">5000
+                                                    کاربر
+                                                    فعال</li>
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی
+                                                    نامحدود</li>
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">بدون
+                                                    شارژ
+                                                    مخفی</li>
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">بکاپ
+                                                    روزانه</li>
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی
+                                                    به
+                                                    سورس فایل</li>
+                                                <li><img src="assets/img/icons/check_icon02.svg" alt="">و ...
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-btn-two">
+                                            <a href="{{ route('checkout', $plan->id) }}" class="btn">فعال سازی این
+                                                طرح</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10">
-                            <div class="pricing-box-two">
-                                <div class="pricing-head-two">
-                                    <h4 class="title">طرح نامحدود</h4>
-                                    <div class="pricing-price-two">
-                                        <h2 class="price monthly_price">99000<strong>تومان</strong></h2>
-                                        <h2 class="price annual_price">999000<strong>تومان</strong></h2>
-                                    </div>
-                                </div>
-                                <div class="pricing-bottom">
-                                    <div class="pricing-list">
-                                        <ul class="list-wrap">
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">5000 کاربر
-                                                فعال</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی
-                                                نامحدود</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بدون شارژ
-                                                مخفی</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">بکاپ
-                                                روزانه</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">دسترسی به
-                                                سورس فایل</li>
-                                            <li><img src="assets/img/icons/check_icon02.svg" alt="">و ...</li>
-                                        </ul>
-                                    </div>
-                                    <div class="pricing-btn-two">
-                                        <a href="contact.html" class="btn">فعال سازی این طرح</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

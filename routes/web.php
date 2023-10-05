@@ -28,8 +28,8 @@ use App\Http\Controllers\user\AdvertisinfUserController;
 
 
 
-Route::get('/', [indexController::class, 'index']);
-// Route::get('/admin', [adminController::class, 'indexPage']);
+Route::get('/', [indexController::class, 'index'])->name('index');
+Route::get('advertisings', [indexController::class, 'showAdvertisings'])->name('showAdvertisings'); // Route::get('/admin', [adminController::class, 'indexPage']);
 Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(function () {
                  Route::get('/index', [AdminController::class, 'indexPage'])->name('index.page');
 
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
                  Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
                  // index
 
-                 // crete advertising for user 
+                 // crete advertising for user
                  Route::get('/advertising/create', [AdvertisinfUserController::class, 'create'])->name('advertising.create');
                  Route::post('/create-adversting', [AdvertisinfUserController::class, 'store'])->name('store.adversting.user');
                  // crete advertising for user
@@ -94,10 +94,10 @@ Route::middleware('auth')->group(function () {
                  Route::get('/list-advertising', [AdvertisinfUserController::class, 'show'])->name('advertising.show.list');
                  // Show Advertising and delete , edit button
 
-                 // edit adversting 
+                 // edit adversting
                  Route::get('/edit-advertising/{advertising}', [UserController::class, 'edit'])->name('advertising.update');
                  Route::post('update-advertising-user/{advertising}', [AdvertisinfUserController::class, 'update'])->name('update.user.adversting');
-                 // edit adversting 
+                 // edit adversting
 
 
                  // delete advertising
@@ -107,10 +107,10 @@ Route::middleware('auth')->group(function () {
                  // Edit User Profile
                  Route::get('/edit-profile', [UserController::class, 'editProfile'])->name('edit.profile');
                  Route::post('update-profile-user/{user}', [UserController::class, 'updateProfile'])->name('update.profile');
-                 // Edit User Profile 
+                 // Edit User Profile
 
-                 Route::get('/checkout', [CheckOutController::class, 'checkOut'])->name('checkout');
-                 Route::post('/checkout', [CheckOutController::class, 'pay']);
+                 Route::get('/checkout/{plan}', [CheckOutController::class, 'checkOut'])->name('checkout');
+                 Route::post('/checkout', [CheckOutController::class, 'pay'])->name('checkout.pay');
 
                  Route::get('/checkout/verify', [CheckOutController::class, 'verify'])->name('checkout.verify');
 });

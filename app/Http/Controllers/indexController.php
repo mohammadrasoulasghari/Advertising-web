@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Plan;
 use App\Models\Category;
+use App\Models\Advertising;
 use Illuminate\Http\Request;
 
 class indexController extends Controller
@@ -13,6 +15,13 @@ class indexController extends Controller
         $categories = Category::all();
         $user_info = auth()->user()?->name;
         $user = auth()->user();
-        return view('index', compact('categories', 'user_info', 'user'));
+        $plans = Plan::all();
+        return view('index', compact('categories', 'user_info', 'user', 'plans'));
+    }
+    public function showAdvertisings(Request $request)
+    {
+
+        $advertisings = Advertising::all();
+        return view('show-advertisings', compact('advertisings'));
     }
 }
