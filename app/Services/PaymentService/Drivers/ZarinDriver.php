@@ -19,29 +19,31 @@ class ZarinDriver implements PaymentDriver
             'callback_url' => route('checkout.verify'),
             'description' => 'this is a test',
         ];
-        // $jsonData = json_encode($data);
+        $jsonData = json_encode($data);
 
-        // $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/request.json');
-        // curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
-        // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        //     'Content-Type: application/json',
-        //     'Content-Length: ' . strlen($jsonData)
-        // ));
+        $ch = curl_init('https://sandbox.zarinpal.com/pg/v4/payment/request.json');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($jsonData)
+        ));
 
-        // $result = curl_exec($ch);
-        // $err = curl_error($ch);
-        // $result = json_decode($result, true, JSON_PRETTY_PRINT);
-        // curl_close($ch);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        $result = json_decode($result, true, JSON_PRETTY_PRINT);
+        curl_close($ch);
 
-        $responce = Http::withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
-        ])->post('https://sandbox.zarinpal.com/pg/v4/payment/request.json', $data);
+        
 
-        dd($responce)
+        // $responce = Http::withHeaders([
+        //     'Accept' => 'application/json',
+        //     'Content-Type' => 'application/json'
+        // ])->post('https://sandbox.zarinpal.com/pg/v4/payment/request.json', $data);
+
+        // dd($responce);
 
 
         if ($err) {

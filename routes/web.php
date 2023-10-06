@@ -26,7 +26,10 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-
+//Route::get('/tes',function (){
+//  $user=\App\Models\Advertising::find(1);
+//  dd($user->user);
+//});
 
 
 
@@ -51,8 +54,10 @@ Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(functi
                  // ===================================
 
                  // create adversting
-                 Route::get('/add-adversting', [AdminController::class, 'addAdversting'])->name('add.adversting');
-                 Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
+        Route::get('/add-adversting', [AdminController::class, 'addAdversting'])->name('add.adversting');
+        Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
+
+
                  // create adversting
                  // delete adversting
                  Route::get('/delete-adversting', [AdminController::class, 'showDeleteAdverstingPage'])->name('showDeleteAdverstingPage');

@@ -28,8 +28,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('admin-panel', function (User $user) {
-            return $user->permission == 0;
+        Gate::define('check-permission',function (User $user){
+           $postCount= $user->posts()->count();
+            $userPermission=$user->permission;
+            return $postCount > $userPermission;
         });
     }
 }

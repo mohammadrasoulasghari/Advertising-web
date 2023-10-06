@@ -15,7 +15,7 @@
             <option value="zarinpal">زرین پال</option>
             <option value="pay">pay.ir</option>
         </select>
-
+        <input type="hidden" name="permission" value="{{$plan->permission}}">
         {{ $plan->name }}
 
         {{--        <select name="type_permission" id=""> --}}

@@ -7,6 +7,7 @@ use App\Models\Advertising;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdvertisinfUserController extends Controller
 {
@@ -27,6 +28,9 @@ class AdvertisinfUserController extends Controller
      */
     public function create(Request $request)
     {
+        if ( Gate::allows('check-permission')) {
+            abort(403,'به سقف رسید');
+        }
         $user = auth()->user();
         $user_id = auth()->user()->id;
         $categories = Category::all();
@@ -41,8 +45,12 @@ class AdvertisinfUserController extends Controller
      */
     public function store(Request $request)
     {
-        Advertising::create($request->all());
-        return redirect(route('advertising.create'));
+        if ( !Gate::allows('check-permission')) {
+            Advertising::create($request->all());
+            return redirect(route('advertising.create'));
+        }
+
+
     }
 
     /**

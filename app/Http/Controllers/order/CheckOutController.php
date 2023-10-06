@@ -24,34 +24,36 @@ class CheckOutController extends Controller
     {
         $user = auth()->user();
         $amount = (int) $request->input('amount', 12000);
-        $type_permission = $request->input('type_permission');
+        $type_permission = $request->permission;
         $type_payment = $request->input('type_payment') == 'pay' ? new PayDriver() : new ZarinDriver();
-        $servicePayment = new PaymentService(new ZarinDriver());
-        $result = $servicePayment->payment($user, $amount);
-        if ($request->input('type_payment') == 'pay') {
+        $servicePayment = new PaymentService(new PayDriver());
+        $result = $servicePayment->payment($user, $amount,collect([
+            'permission' => $type_permission
+        ]));
+
             if ($result->get('status')) {
                 return redirect()->secure($result->get('redirect_url'));
             } else {
                 return back()->withErrors($result->get('message'));
             }
-        }
+
     }
 
     public function verify(Request $request, User $user)
     {
-        $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
+       $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
         $user = auth()->user();
-        if ($type_payment == 'pay') {
+
             if (!$request->status == 1) {
                 dd('Invalid');
                 return back()->withErrors('خطایی رخ داده است');
             }
-        }
-        $servicePayment = new PaymentService(new ZarinDriver());
+
+        $servicePayment = new PaymentService(new PayDriver());
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
-            $user->update(['permission' => 2]);
-
+            $permission=$result->get('data')['permission'];
+            $user->update(['permission' => $permission]);
             return redirect()->route('index')->with('success', $result->get('message'));
         } else {
             dd('سسسسس');
