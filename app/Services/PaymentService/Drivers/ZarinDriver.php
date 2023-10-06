@@ -2,59 +2,90 @@
 
 namespace App\Services\PaymentService\Drivers;
 
-require_once("zarinpal_function.php");
-
 use App\Models\User;
 use App\Services\PaymentService\Core\interfaces\PaymentDriver;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
-use zarinpal;
+use Http;
 
 class ZarinDriver implements PaymentDriver
 {
-    public $amount;
 
-    public function pay(Authenticatable|User $user, int $amount, Collection|null $additionalData)
+    public function pay(Authenticatable|User $user, int $amount = 10000, Collection|null $additionalData)
     {
-        $zp     = new zarinpal();
-        $result = $zp->request('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', $amount, '$Description', '$Email', '$Mobile', route('checkout.verify'), $SandBox = true, $ZarinGate = true);
-        if (isset($result["Status"]) && $result["Status"] == 100) {
-            // Success and redirect to pay
-            $zp->redirect($result["StartPay"]);
+        $data = [
+            "merchant_id" => env('ZARINPAL_MERCHENT'),
+            'amount' => $amount,
+            'callback_url' => route('checkout.verify'),
+            'description' => 'this is a test',
+        ];
+        // $jsonData = json_encode($data);
+
+        // $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/request.json');
+        // curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
+        // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        //     'Content-Type: application/json',
+        //     'Content-Length: ' . strlen($jsonData)
+        // ));
+
+        // $result = curl_exec($ch);
+        // $err = curl_error($ch);
+        // $result = json_decode($result, true, JSON_PRETTY_PRINT);
+        // curl_close($ch);
+
+        $responce = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->post('https://sandbox.zarinpal.com/pg/v4/payment/request.json', $data);
+
+        dd($responce)
+
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
         } else {
-            // error
-            echo "خطا در ایجاد تراکنش";
-            echo "<br />کد خطا : " . $result["Status"];
-            echo "<br />تفسیر و علت خطا : " . $result["Message"];
+            if (empty($result['errors'])) {
+                if ($result['data']['code'] == 100) {
+                    header('Location: https://www.zarinpal.com/pg/StartPay/' . $result['data']["authority"]);
+                }
+            } else {
+                echo 'Error Code: ' . $result['errors']['code'];
+                echo 'message: ' .  $result['errors']['message'];
+            }
         }
     }
 
 
     public function verify(Authenticatable|User $user, array $data)
     {
-        $MerchantID     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
-        $ZarinGate         = true;
-        $SandBox         = true;
-        $zp     = new zarinpal();
-        $result = $zp->verify($MerchantID, 12000, $SandBox, $ZarinGate);
+        $Authority = $_GET['Authority'];
+        $data = array("merchant_id" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "authority" => $Authority, "amount" => 1000);
+        $jsonData = json_encode($data);
+        $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/verify.json');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v4');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($jsonData)
+        ));
 
-        if (isset($result["Status"]) && $result["Status"] == 100) {
-            return collect([
-                'status' => true,
-                'data' => [
-                    'permission' => 2
-                ]
-            ]);
-            // Success
-            echo "تراکنش با موفقیت انجام شد";
-            echo "<br />مبلغ : " . $result["Amount"];
-            echo "<br />کد پیگیری : " . $result["RefID"];
-            echo "<br />Authority : " . $result["Authority"];
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result = json_decode($result, true);
+        if ($err) {
+            echo "cURL Error #:" . $err;
         } else {
-            // error
-            echo "پرداخت ناموفق";
-            echo "<br />کد خطا : " . $result["Status"];
-            echo "<br />تفسیر و علت خطا : " . $result["Message"];
+            if ($result['data']['code'] == 100) {
+                echo 'Transation success. RefID:' . $result['data']['ref_id'];
+            } else {
+                echo 'code: ' . $result['errors']['code'];
+                echo 'message: ' .  $result['errors']['message'];
+            }
         }
     }
 }

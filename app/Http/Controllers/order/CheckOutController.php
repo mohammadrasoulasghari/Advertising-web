@@ -26,13 +26,10 @@ class CheckOutController extends Controller
         $amount = (int) $request->input('amount', 12000);
         $type_permission = $request->input('type_permission');
         $type_payment = $request->input('type_payment') == 'pay' ? new PayDriver() : new ZarinDriver();
-        $servicePayment = new PaymentService($type_payment);
-        $result = $servicePayment->payment($user, $amount, collect([
-            'permission' => $type_permission,
-        ]));
+        $servicePayment = new PaymentService(new ZarinDriver());
+        $result = $servicePayment->payment($user, $amount);
         if ($request->input('type_payment') == 'pay') {
             if ($result->get('status')) {
-
                 return redirect()->secure($result->get('redirect_url'));
             } else {
                 return back()->withErrors($result->get('message'));
@@ -45,12 +42,10 @@ class CheckOutController extends Controller
         $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
         $user = auth()->user();
         if ($type_payment == 'pay') {
-            if (!$request->status == 1 || $request->Status == 'OK') {
+            if (!$request->status == 1) {
                 dd('Invalid');
                 return back()->withErrors('خطایی رخ داده است');
             }
-        } elseif (!$request->Status == 'OK') {
-            dd('InValid');
         }
         $servicePayment = new PaymentService(new ZarinDriver());
         $result = $servicePayment->verify($user, $request->all());

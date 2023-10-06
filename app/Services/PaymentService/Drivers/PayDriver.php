@@ -16,7 +16,8 @@ class PayDriver implements PaymentDriver
         $result = Http::post('https://pay.ir/pg/send', [
             'api'          => config('payment.drivers.pay.api_key'),
             'amount'       => $amount,
-            'redirect'     => route('checkout.verify')
+            'redirect'     => route('checkout.verify'),
+
         ]);
 
         $result = $result->json();
