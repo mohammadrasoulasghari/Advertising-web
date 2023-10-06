@@ -16,15 +16,12 @@ class PayDriver implements PaymentDriver
         $result = Http::post('https://pay.ir/pg/send', [
             'api'          => config('payment.drivers.pay.api_key'),
             'amount'       => $amount,
-            'redirect'     => route('checkout.verify', [
-                'permission' => $additionalData?->get('permission'),
-            ]),
+            'redirect'     => route('checkout.verify')
         ]);
 
         $result = $result->json();
 
         if ($result['status']) {
-
             return collect([
                 'status' => true,
                 'token' => $result['token'],
@@ -47,12 +44,13 @@ class PayDriver implements PaymentDriver
         ]);
         $result = $result->json();
         if (isset($result['status'])) {
-            if ($result['status'] == 1) {e
+            if ($result['status'] == 1) {
+
                 //TODO check permission number by price payment 
                 return collect([
                     'status' => true,
                     'data' => [
-                        'permission' => $data['permission'],
+                        'permission' => 2,
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

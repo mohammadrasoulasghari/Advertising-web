@@ -110,11 +110,20 @@
                                                         placeholder="لطفا آدرس تصویر خود را وارد کنید">
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="datepicker" class="form-label">لطفا تاریخ را انتخاب
+                                                        کیند</label>
+                                                    <input type="text" id="datepicker" name="date"
+                                                        class="form-control datepicker" placeholder="انتخاب تاریخ">
+                                                </div>
+                                            </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">لطفا دسته بندی آگهی خود را انتخاب کنید</label>
                                                 <select name="category_id" class="form-control select2"
                                                     style="width: 100%;">
-                                                    <option selected="selected">یگی از موارد زیر را انتخاب کنید</option>
+                                                    <option selected="selected">یگی از موارد زیر را انتخاب کنید
+                                                    </option>
                                                     @foreach ($categories as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->name }}
                                                         </option>

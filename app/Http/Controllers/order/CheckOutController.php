@@ -9,7 +9,8 @@ use App\Models\User;
 use App\Services\PaymentService\Drivers\PayDriver;
 use App\Services\PaymentService\Core\PaymentService;
 use App\Services\PaymentService\Drivers\ZarinDriver;
-
+use Illuminate\Support\Arr;
+use zarinpal;
 
 class CheckOutController extends Controller
 {
@@ -30,28 +31,32 @@ class CheckOutController extends Controller
             'permission' => $type_permission,
         ]));
         if ($request->input('type_payment') == 'pay') {
-             if ($result->get('status')) {
-                 return redirect()->away($result->get('redirect_url'));
-             } else {
-                 return back()->withErrors($result->get('message'));
-             }
+            if ($result->get('status')) {
+
+                return redirect()->secure($result->get('redirect_url'));
+            } else {
+                return back()->withErrors($result->get('message'));
+            }
         }
     }
 
-    public function verify(Request $request)
+    public function verify(Request $request, User $user)
     {
-
+        $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
         $user = auth()->user();
-        if (!$request->status == 1) {
-            return back()->withErrors('خطایی رخ داده است');
+        if ($type_payment == 'pay') {
+            if (!$request->status == 1 || $request->Status == 'OK') {
+                dd('Invalid');
+                return back()->withErrors('خطایی رخ داده است');
+            }
+        } elseif (!$request->Status == 'OK') {
+            dd('InValid');
         }
-        $servicePayment = new PaymentService(new PayDriver());
+        $servicePayment = new PaymentService(new ZarinDriver());
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
-            dd('aaa');
-//            User::query()->find($user->id)->update([
-//                'permission' => $result->get('data')['permission'],
-//            ]);
+            $user->update(['permission' => 2]);
+
             return redirect()->route('index')->with('success', $result->get('message'));
         } else {
             dd('سسسسس');

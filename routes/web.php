@@ -114,7 +114,9 @@ Route::middleware('auth')->group(function () {
                  Route::get('/checkout/{plan}', [CheckOutController::class, 'checkOut'])->name('checkout');
                  Route::post('/checkout', [CheckOutController::class, 'pay'])->name('checkout.pay');
 
-                 Route::get('/checkout/verify', [CheckOutController::class, 'verify'])->name('checkout.verify');
+                 // Route::get('/checkout/auth', function () {
+                 // });
+                 Route::get('/check2', [CheckOutController::class, 'verify'])->name('checkout.verify');
 });
 
 
