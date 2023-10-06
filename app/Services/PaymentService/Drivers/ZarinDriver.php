@@ -32,19 +32,17 @@ class ZarinDriver implements PaymentDriver
 
     public function verify(Authenticatable|User $user, array $data)
     {
-        dd($data);
         $MerchantID     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
-        $Amount = 19000;
         $ZarinGate         = true;
         $SandBox         = true;
         $zp     = new zarinpal();
-        $result = $zp->verify($MerchantID, $Amount, $SandBox, $ZarinGate);
+        $result = $zp->verify($MerchantID, 12000, $SandBox, $ZarinGate);
 
         if (isset($result["Status"]) && $result["Status"] == 100) {
             return collect([
                 'status' => true,
                 'data' => [
-                    'permission' => $data['permission']
+                    'permission' => 2
                 ]
             ]);
             // Success

@@ -15,11 +15,12 @@
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('assets-admin/css/vendors_css.css') }}">
-
+    @stack('style')
     <!-- Style-->
     <link rel="stylesheet" href="{{ asset('assets-admin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/skin_color.css') }}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
@@ -93,6 +94,12 @@
                                                         class="form-control" placeholder="سن">
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">لطفا تاریخ تولد خود را وارد کنید</label>
+
+                                                <input type="datetime-local" class="form-control" name="birth_day">
+                                            </div>
                                         </div>
 
                                         <button type="submit">submit</button>
@@ -129,7 +136,10 @@
     <!-- Master Admin App -->
     <script src="{{ asset('assets-admin/js/template.js') }}"></script>
     <script src="{{ asset('assets-admin/vendor_components/select2/dist/js/select2.full.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type=datetime-local]");
+    </script>
 </body>
 
 

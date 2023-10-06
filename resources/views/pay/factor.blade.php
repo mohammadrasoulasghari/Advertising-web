@@ -11,12 +11,14 @@
 <body>
     <form action="{{ route('checkout.pay') }}" method="POST">
         @csrf
-        <select name="type_payment" id="">
-            <option value="pay">pay.ir</option>
+        {{-- <select name="type_payment" id="">
             <option value="zarinpal">زرین پال</option>
-        </select>
+            <option value="pay">pay.ir</option>
+        </select> --}}
+
+        <input type="text" name="type" id="" placeholder="sss">
         <p>{{ $plan->name }}</p>
-        inp
+
         {{--        <select name="type_permission" id=""> --}}
         {{--            <option value="1">برنزی</option> --}}
         {{--            <option value="2">طلایی</option> --}}
