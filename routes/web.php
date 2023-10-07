@@ -116,6 +116,11 @@ Route::middleware('auth')->group(function () {
                  Route::post('update-profile-user/{user}', [UserController::class, 'updateProfile'])->name('update.profile');
                  // Edit User Profile
 
+//                  manage orders
+    Route::get('manage/orders',[ProfileController::class,'orders'])->name('order.show');
+
+//                  manage orders
+
                  Route::get('/checkout/{plan}', [CheckOutController::class, 'checkOut'])->name('checkout');
                  Route::post('/checkout', [CheckOutController::class, 'pay'])->name('checkout.pay');
 

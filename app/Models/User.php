@@ -14,6 +14,7 @@ class User extends Authenticatable
     public  function  posts(){
         return $this->hasMany(Advertising::class);
     }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

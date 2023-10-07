@@ -53,9 +53,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('add.category') }}">
+                        <a href="{{ route('order.show') }}">
                             <i data-feather="grid"></i>
-                            <span>افزودن دسته بندی</span>
+                            <span>مدیریت تراکنش ها</span>
                         </a>
                     </li>
                     <li>

@@ -7,10 +7,12 @@
                 <span class="light-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
                 <span class="dark-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
             </div>
+            <a href="{{route('index')}}">
             <div class="logo-lg">
                 <span class="light-logo"><img src="{{ asset('images/logo-dark-text.png') }}" alt="logo"></span>
                 <span class="dark-logo"><img src="{{ asset('images/logo-light-text.png') }}" alt="logo"></span>
             </div>
+            </a>
         </a>
     </div>
     <!-- Header Navbar -->

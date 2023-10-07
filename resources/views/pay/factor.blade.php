@@ -16,7 +16,12 @@
             <option value="pay">pay.ir</option>
         </select>
         <input type="hidden" name="permission" value="{{$plan->permission}}">
+        <input type="hidden" name="amount" value="{{$plan->price}}">
+        <input type="hidden" name="planId" value="{{$plan->id}}">
+
+
         {{ $plan->name }}
+        {{ $plan->price }}
 
         {{--        <select name="type_permission" id=""> --}}
         {{--            <option value="1">برنزی</option> --}}

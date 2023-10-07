@@ -50,6 +50,8 @@ class PayDriver implements PaymentDriver
                     'status' => true,
                     'data' => [
                         'permission' => $data['permission'],
+                        'amount'=> $data['amount'],
+                        'plan_id' =>$data['plan_id']
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

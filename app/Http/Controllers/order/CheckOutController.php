@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\order;
 
+use App\Models\orders;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,12 +24,15 @@ class CheckOutController extends Controller
     public function pay(Request $request)
     {
         $user = auth()->user();
-        $amount = (int) $request->input('amount', 12000);
+        $amount = (int) $request->amount;
+        $plan_id = (int) $request->planId;
         $type_permission = $request->permission;
         $type_payment = $request->input('type_payment') == 'pay' ? new PayDriver() : new ZarinDriver();
         $servicePayment = new PaymentService(new PayDriver());
         $result = $servicePayment->payment($user, $amount,collect([
-            'permission' => $type_permission
+            'permission' => $type_permission,
+            'amount' => $amount,
+            'plan_id' =>$plan_id,
         ]));
 
             if ($result->get('status')) {
@@ -39,7 +43,7 @@ class CheckOutController extends Controller
 
     }
 
-    public function verify(Request $request, User $user)
+    public function verify(Request $request, User $user,orders $orders)
     {
        $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
         $user = auth()->user();
@@ -53,7 +57,14 @@ class CheckOutController extends Controller
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
             $permission=$result->get('data')['permission'];
+            $amount=$result->get('data')['amount'];
+            $planId=$result->get('data')['plan_id'];
             $user->update(['permission' => $permission]);
+            $orders->create([
+                'user_id' => $user->id,
+                'amount'=>$amount,
+                'plan_id'=>$planId
+            ]);
             return redirect()->route('index')->with('success', $result->get('message'));
         } else {
             dd('سسسسس');
