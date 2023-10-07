@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Advertising;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use RealRashid\SweetAlert\Facades\Alert;
 
 

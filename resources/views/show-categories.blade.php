@@ -32,7 +32,7 @@
 <body>
 
 
-    <!-- preloader -->
+    {{-- <!-- preloader -->
     <div id="preloader">
         <div id="loading-center">
             <div class="loader">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <!-- preloader-end -->
+    <!-- preloader-end --> --}}
 
     <!-- Scroll-top -->
     <button class="scroll-top scroll-to-target" data-target="html">
@@ -236,7 +236,8 @@
                                             <div class="blog-post-item-two">
                                                 <div class="blog-post-thumb-two">
                                                     <a href="blog-details.html"><img
-                                                            src="{{ $advertise->picture_url }}" alt=""></a>
+                                                            src="assets/img/blog/h3_blog_img01.jpg"
+                                                            alt=""></a>
                                                     <a href="blog.html"
                                                         class="tag tag-two">{{ $advertise->created_at }}</a>
                                                 </div>
@@ -286,17 +287,6 @@
                                     </form>
                                 </div>
                                 <div class="blog-widget">
-                                    <h4 class="bw-title">دسته بندی</h4>
-                                    <div class="bs-cat-list">
-                                        <ul class="list-wrap">
-                                            @foreach ($categories as $category)
-                                                <li><a
-                                                        href="{{ route('show.category.post', $category->id) }}">{{ $category->name }}<span>(02)</span></a>
-                                                </li>
-                                            @endforeach
-                                    </div>
-                                </div>
-                                <div class="blog-widget">
                                     <h4 class="bw-title">برترین مقالات</h4>
                                     <div class="rc-post-wrap">
                                         <div class="rc-post-item">
@@ -334,7 +324,8 @@
                                         </div>
                                         <div class="rc-post-item">
                                             <div class="thumb">
-                                                <a href="blog-details.html"><img src="" alt=""></a>
+                                                <a href="blog-details.html"><img src="assets/img/blog/rc_post04.jpg"
+                                                        alt=""></a>
                                             </div>
                                             <div class="content">
                                                 <span class="date"><i class="far fa-calendar"></i>1402/05/27</span>

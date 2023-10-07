@@ -23,7 +23,7 @@
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
-
+    <x-alert></x-alert>
     <div class="wrapper">
         <div id="loader"></div>
 

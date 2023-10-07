@@ -22,6 +22,13 @@ class indexController extends Controller
     {
         $filters = $request->only('search');
         $advertisings = Advertising::filterr($filters)->get();
-        return view('show-advertisings', compact('advertisings'));
+        $categories = Category::all();
+        return view('show-advertisings', compact('advertisings', 'categories'));
+    }
+    public function showCategoryPost(Request $request, Category $category)
+    {
+        $filters = $request->only('search');
+        $advertisings = Advertising::all()->where('category_id', $category->id);
+        return view('show-categories', compact('advertisings'));
     }
 }

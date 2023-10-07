@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\indexController;
@@ -7,12 +9,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckPermissionAdmin;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\AdvertisingController;
 use App\Http\Controllers\order\CheckOutController;
+use App\Http\Controllers\admin\AdvertisingController;
 use App\Http\Controllers\user\AdvertisinfUserController;
-use App\Mail\VerifyEmail;
-use Illuminate\Support\Facades\Mail;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,11 +33,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 //});
 
 
-Route::get('/test',function (){
-    Alert::success('Title');
 
-
-});
 
 Route::get('/', [indexController::class, 'index'])->name('index');
 Route::get('advertisings', [indexController::class, 'showAdvertisings'])->name('showAdvertisings'); // Route::get('/admin', [adminController::class, 'indexPage']);
@@ -60,8 +56,8 @@ Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(functi
                  // ===================================
 
                  // create adversting
-        Route::get('/add-adversting', [AdminController::class, 'addAdversting'])->name('add.adversting');
-        Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
+                 Route::get('/add-adversting', [AdminController::class, 'addAdversting'])->name('add.adversting');
+                 Route::post('/create-adversting', [AdvertisingController::class, 'store'])->name('store.adversting');
 
 
                  // create adversting
@@ -122,10 +118,16 @@ Route::middleware('auth')->group(function () {
                  Route::post('update-profile-user/{user}', [UserController::class, 'updateProfile'])->name('update.profile');
                  // Edit User Profile
 
-//                  manage orders
-    Route::get('manage/orders',[ProfileController::class,'orders'])->name('order.show');
+                 // show category post
+                 Route::get('/show-category/{category}', [indexController::class, 'showCategoryPost'])->name('show.category.post');
+                 // show category post
 
-//                  manage orders
+
+
+                 //                  manage orders
+                 Route::get('manage/orders', [ProfileController::class, 'orders'])->name('order.show');
+
+                 //                  manage orders
 
                  Route::get('/checkout/{plan}', [CheckOutController::class, 'checkOut'])->name('checkout');
                  Route::post('/checkout', [CheckOutController::class, 'pay'])->name('checkout.pay');

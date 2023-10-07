@@ -32,12 +32,7 @@
         <x-header>
         </x-header>
         <x-side-bar-panel></x-side-bar-panel>
-
-        @if (session('alert'))
-            <div class="alert alert-success">
-                {{ session('alert') }}
-            </div>
-        @endif
+        <x-alert></x-alert>
 
         <div class="content-wrapper">
             <div class="container-full">

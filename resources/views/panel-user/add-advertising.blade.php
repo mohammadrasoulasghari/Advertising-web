@@ -14,7 +14,7 @@
         </x-header>
 
         <x-side-bar-user :user='$user'></x-side-bar-user>
-
+        <x-alert></x-alert>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -49,7 +49,8 @@
                                     <h4 class="box-title">فرم افزودن محصولات در سایت آراز دیوار</h4>
                                 </div>
                                 <!-- /.box-header -->
-                                <form class="form" action="{{ route('store.adversting.user') }}" method="POST">
+                                <form class="form" action="{{ route('store.adversting.user') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="box-body">
                                         <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i>فرم افزودن
@@ -89,7 +90,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">آدرس تصویر شما</label>
-                                                    <input type="text" name="picture_url" class="form-control"
+                                                    <input type="file" name="picture_url" class="form-control"
                                                         placeholder="لطفا آدرس تصویر خود را وارد کنید">
                                                 </div>
                                             </div>

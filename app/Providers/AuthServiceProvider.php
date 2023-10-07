@@ -28,9 +28,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('check-permission',function (User $user){
-           $postCount= $user->posts()->count();
-            $userPermission=$user->permission;
+        Gate::define('check-permission', function (User $user) {
+            $postCount = $user->posts()->count();
+            $userPermission = $user->permission;
             return $postCount > $userPermission;
         });
     }

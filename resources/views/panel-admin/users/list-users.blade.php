@@ -23,7 +23,7 @@
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
-
+    <x-alert></x-alert>
 
 
     <div class="wrapper">
@@ -88,8 +88,7 @@
                                                         <td>#12485791</td>
                                                         <td>{{ $user->permission }}</td>
                                                         <td>{{ $user->created_at }}</td>
-                                                        <td><span class="badge badge-pill badge-success">پرداخت
-                                                                شده</span>
+                                                        <td><span class="badge badge-pill badge-success">بر خط</span>
                                                         </td>
                                                         <td><a href="{{ route('showEditPage', $user->id) }}"
                                                                 class="text-info me-10" data-bs-toggle="tooltip"

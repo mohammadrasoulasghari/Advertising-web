@@ -31,7 +31,7 @@
         </x-header>
 
         <x-side-bar-panel></x-side-bar-panel>
-
+        <x-alert></x-alert>ss
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="container-full">

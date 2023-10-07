@@ -15,7 +15,7 @@ class PayDriver implements PaymentDriver
         $result = Http::post('https://pay.ir/pg/send', [
             'api'          => config('payment.drivers.pay.api_key'),
             'amount'       => $amount,
-            'redirect'     => route('checkout.verify',$additionalData->toArray()),
+            'redirect'     => route('checkout.verify', $additionalData->toArray()),
         ]);
 
         $result = $result->json();
@@ -50,8 +50,8 @@ class PayDriver implements PaymentDriver
                     'status' => true,
                     'data' => [
                         'permission' => $data['permission'],
-                        'amount'=> $data['amount'],
-                        'plan_id' =>$data['plan_id']
+                        'amount' => $data['amount'],
+                        'plan_id' => $data['plan_id']
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

@@ -10,8 +10,7 @@
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('assets-admin/css/vendors_css.css') }}">
-    @include('sweetalert::alert')
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 
 
     <!-- Style-->

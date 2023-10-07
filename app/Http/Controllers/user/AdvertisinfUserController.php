@@ -30,8 +30,8 @@ class AdvertisinfUserController extends Controller
      */
     public function create(Request $request)
     {
-        if ( Gate::allows('check-permission')) {
-            abort(403,'به سقف رسید');
+        if (Gate::allows('check-permission')) {
+            abort(403, 'به سقف رسید');
         }
         $user = auth()->user();
         $user_id = auth()->user()->id;
@@ -48,12 +48,10 @@ class AdvertisinfUserController extends Controller
      */
     public function store(Request $request)
     {
-        if ( !Gate::allows('check-permission')) {
+        if (!Gate::allows('check-permission')) {
             Advertising::create($request->all());
-            return redirect(route('advertising.create'));
+            return redirect(route('advertising.create'))->with('alert', 'successss');
         }
-
-
     }
 
     /**
@@ -91,7 +89,7 @@ class AdvertisinfUserController extends Controller
     public function update(Request $request, Advertising $advertising)
     {
         $advertising->update($request->all());
-        return redirect(route('advertising.update', $advertising->id));
+        return redirect(route('advertising.update', $advertising->id))->with('alert', 'successss');
     }
 
     /**
@@ -104,6 +102,6 @@ class AdvertisinfUserController extends Controller
     {
         $advertising = Advertising::find($advertising->id);
         $advertising->delete();
-        return redirect(route('advertising.show.list'));
+        return redirect(route('advertising.show.list'))->with('alert', 'successss');
     }
 }

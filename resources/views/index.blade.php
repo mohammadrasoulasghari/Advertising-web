@@ -12,21 +12,21 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/odometer.css">
-    <link rel="stylesheet" href="assets/css/jarallax.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/aos.css">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/rtl.css">
-    <link rel="stylesheet" href="assets/css/font.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/odometer.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jarallax.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/rtl.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 
 <body>
@@ -373,110 +373,7 @@
     <!-- main-area-end -->
 
 
-    <!-- footer-area -->
-    <footer>
-        <div class="footer-area-two footer-bg-two" data-background="assets/img/bg/h2_footer_bg.jpg">
-            <div class="footer-top-two">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-7">
-                            <div class="footer-widget">
-                                <div class="fw-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                                </div>
-                                <div class="footer-content">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                        گرافیک است.</p>
-                                    <div class="footer-info">
-                                        <ul class="list-wrap">
-                                            <li>
-                                                <div class="icon">
-                                                    <i class="flaticon-phone-call"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <a href="tel:0123456789">123 888 9999</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="icon">
-                                                    <i class="flaticon-clock"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>شنبه – پنج شنبه: 8 صبح – 5 عصر, <br> جمعه : <span>تعطیل</span>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-5 col-sm-6">
-                            <div class="footer-widget">
-                                <h4 class="fw-title">منو</h4>
-                                <div class="footer-link">
-                                    <ul class="list-wrap">
-                                        <li><a href="about.html">شرکت</a></li>
-                                        <li><a href="contact.html">مشاغل</a></li>
-                                        <li><a href="contact.html">رسانه های مطبوعاتی</a></li>
-                                        <li><a href="blog.html">وبلاگ</a></li>
-                                        <li><a href="contact.html">حریم خصوصی</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-5 col-sm-6">
-                            <div class="footer-widget">
-                                <h4 class="fw-title">دسترسی سریع</h4>
-                                <div class="footer-link">
-                                    <ul class="list-wrap">
-                                        <li><a href="contact.html">چگونه کار می کند</a></li>
-                                        <li><a href="contact.html">شرکا</a></li>
-                                        <li><a href="contact.html">گواهینامه ها</a></li>
-                                        <li><a href="contact.html">مطالعات موردی</a></li>
-                                        <li><a href="contact.html">قیمت گذاری</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-7">
-                            <div class="footer-widget">
-                                <h4 class="fw-title">خبرنامه ما</h4>
-                                <div class="footer-newsletter">
-                                    <p>با عضویت در خبرنامه از جدیدترین مقاله و تخفیفات ما مطلع شوید.</p>
-                                    <form action="#">
-                                        <input type="email" placeholder="ایمیل خود را وارد کنید">
-                                        <button type="submit">عضویت</button>
-                                    </form>
-                                    <div class="footer-social footer-social-two">
-                                        <ul class="list-wrap">
-                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom-two">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="copyright-text-two text-center">
-                                <p>تمامی حقوق محفوظ است | فارس کد</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer-area-end -->
+
 
 
     <!-- JS here -->
