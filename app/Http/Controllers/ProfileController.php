@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+
+
 class ProfileController extends Controller
 {
     /**
@@ -35,8 +37,8 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit');
+;
     }
 
     /**
@@ -64,7 +66,7 @@ class ProfileController extends Controller
         $user=Auth::user();
         $orders =orders::all();
         $orders->where('user_id',$user->id);
-      return view('panel-user.edit-orders',compact('orders',));
+      return view('panel-user.edit-orders',compact('orders','user'));
 
     }
 }

@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AdvertisinfUserController extends Controller
 {
@@ -34,6 +36,7 @@ class AdvertisinfUserController extends Controller
         $user = auth()->user();
         $user_id = auth()->user()->id;
         $categories = Category::all();
+
         return view('panel-user.add-advertising', compact('categories', 'user_id', 'user'));
     }
 

@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Advertising;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class UserController extends Controller
 {
@@ -31,7 +33,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        return redirect(route('advertising.update'));
+        return redirect(route('advertising.update'))->Alert::alert('Title', 'Message', 'Type');
     }
     public function editProfile()
     {

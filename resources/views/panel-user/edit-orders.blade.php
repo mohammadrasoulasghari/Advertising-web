@@ -3,24 +3,8 @@
 
 <!-- Mirrored from www.fudademo.ir/fudapanel/general_form.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 13:28:52 GMT -->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="images/favicon.ico">
+<x-layout-panel></x-layout-panel>
 
-    <title>قالب ادمین - همه منظوره</title>
-
-    <!-- Vendors Style-->
-    <link rel="stylesheet" href="{{ asset('assets-admin/css/vendors_css.css') }}">
-
-    <!-- Style-->
-    <link rel="stylesheet" href="{{ asset('assets-admin/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets-admin/css/skin_color.css') }}">
-
-</head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
 
@@ -31,7 +15,7 @@
 
     <x-header>
     </x-header>
-    <x-side-bar-panel></x-side-bar-panel>
+    <x-side-bar-user :user="$user"></x-side-bar-user>
 
     @if (session('alert'))
         <div class="alert alert-success">

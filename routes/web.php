@@ -12,6 +12,7 @@ use App\Http\Controllers\order\CheckOutController;
 use App\Http\Controllers\user\AdvertisinfUserController;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,11 @@ use Illuminate\Support\Facades\Mail;
 //});
 
 
+Route::get('/test',function (){
+    Alert::success('Title');
+
+
+});
 
 Route::get('/', [indexController::class, 'index'])->name('index');
 Route::get('advertisings', [indexController::class, 'showAdvertisings'])->name('showAdvertisings'); // Route::get('/admin', [adminController::class, 'indexPage']);
