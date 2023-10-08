@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Storage;
 class Advertising extends Model
 {
     use HasFactory;
+
+    public static function paginate(int $int)
+    {
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

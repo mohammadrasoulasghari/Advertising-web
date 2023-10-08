@@ -231,7 +231,7 @@
                         <div class="col-71">
                             <div class="blog-post-wrap">
                                 <div class="row">
-                                    @foreach ($advertisings as $advertise)
+                                    @foreach ($advertisingsShow as $advertise)
                                         <div class="col-md-6">
                                             <div class="blog-post-item-two">
                                                 <div class="blog-post-thumb-two">

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAdvertisingRequest;
 use App\Models\Advertising;
 use App\Models\Category;
 use App\Models\User;
+use App\Repositories\AdvertisingsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AdvertisinfUserController extends Controller
 {
+    private $advertising;
+
+
+    public function __construct(AdvertisingsRepository $advertising)
+    {
+        $this->advertising=$advertising;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,19 +60,20 @@ class AdvertisinfUserController extends Controller
      */
     public function store(StoreAdvertisingRequest $request)
     {
+        $data=[
+            'name'=> $request->name,
+            'description' =>$request->description,
+            'slug' => $request->slug,
+            'phone_number' =>$request->phone_number,
+            'category_id' =>$request->category_id,
+            'picture_url' =>$picture_url
+        ];
         $picture_url= Storage::putFile('advertise',$request->picture_url);
 //        if (!Gate::allows('check-permission')) {
 //            $request->merge([
 //                'picture_url' => $picture_url
 //            ]);
-            Advertising::create([
-                'name'=> $request->name,
-                'description' =>$request->description,
-                'slug' => $request->slug,
-                'phone_number' =>$request->phone_number,
-                'category_id' =>$request->category_id,
-                'picture_url' =>$picture_url
-            ]);
+             $this->advertising->create($data);
             return redirect(route('advertising.create'))->with('alert', 'successss');
         }
 
