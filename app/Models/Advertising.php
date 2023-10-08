@@ -11,6 +11,9 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @method static create(array $all)
+ */
 class Advertising extends Model
 {
     use HasFactory;
@@ -32,8 +35,8 @@ class Advertising extends Model
 
         return $query;
     }
-    // public function getPictureUrlAttribute()
-    // {
-    //     return  '/storage' . $this->picture_url;
-    // }
+//     public function getPictureUrlAttribute()
+//     {
+//         return  '/storage' . $this->picture_url;
+//     }
 }

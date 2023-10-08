@@ -236,7 +236,7 @@
                                             <div class="blog-post-item-two">
                                                 <div class="blog-post-thumb-two">
                                                     <a href="blog-details.html"><img
-                                                            src="{{ $advertise->picture_url }}" alt=""></a>
+                                                            src="{{asset('storage/advertise/'.$advertise->picture_url)}}" alt=""></a>
                                                     <a href="blog.html"
                                                         class="tag tag-two">{{ $advertise->created_at }}</a>
                                                 </div>

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Advertising;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -23,7 +24,7 @@ class UserController extends Controller
         return redirect(route('list.users'));
     }
     public function edit(Advertising $advertising)
-    {
+    {      
         $adversting = Advertising::find($advertising->id);
         $categories = Category::all();
         $user = auth()->user();

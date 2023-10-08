@@ -11,18 +11,6 @@ class AdvertisingController extends Controller
 {
     public function store(Request $request)
     {
-        // $path = Storage::putFile('', $request->picture_url);
-        // $request->merge([
-        //     'picture_url' => $path,
-        // ]);
-        // dd($request->picture_url);
-
-
-
-        $path = $request->file('picture_url')->store('picture_url');
-        dd($path);
-
-        $file_name = $request->file('picture_url')->hashName();
 
         Advertising::create($request->all());
         return redirect(route('add.adversting'))->with('alert', 'successss');

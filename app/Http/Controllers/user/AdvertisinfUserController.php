@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -30,9 +31,10 @@ class AdvertisinfUserController extends Controller
      */
     public function create(Request $request)
     {
-        if (Gate::allows('check-permission')) {
-            abort(403, 'به سقف رسید');
-        }
+
+//        if (Gate::allows('check-permission')) {
+//            abort(403, 'به سقف رسید');
+//        }
         $user = auth()->user();
         $user_id = auth()->user()->id;
         $categories = Category::all();
@@ -48,11 +50,22 @@ class AdvertisinfUserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Gate::allows('check-permission')) {
-            Advertising::create($request->all());
+        $picture_url= Storage::putFile('advertise',$request->picture_url);
+//        if (!Gate::allows('check-permission')) {
+//            $request->merge([
+//                'picture_url' => $picture_url
+//            ]);
+            Advertising::create([
+                'name'=> $request->name,
+                'description' =>$request->description,
+                'slug' => $request->slug,
+                'phone_number' =>$request->phone_number,
+                'category_id' =>$request->category_id,
+                'picture_url' =>$picture_url
+            ]);
             return redirect(route('advertising.create'))->with('alert', 'successss');
         }
-    }
+
 
     /**
      * Display the specified resource.
