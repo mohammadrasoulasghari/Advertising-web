@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         Category::create([
             'name' => $request->name,

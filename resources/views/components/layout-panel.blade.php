@@ -5,7 +5,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
-
     <title>قالب ادمین - همه منظوره</title>
 
     <!-- Vendors Style-->

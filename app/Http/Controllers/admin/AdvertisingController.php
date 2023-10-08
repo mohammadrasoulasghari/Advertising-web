@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreAdvertisingRequest;
 use App\Models\Advertising;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AdvertisingController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreAdvertisingRequest $request)
     {
 
         Advertising::create($request->all());

@@ -6,6 +6,15 @@
 <x-layout-panel></x-layout-panel>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed rtl">
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li >{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <div class="wrapper">
         <div id="loader"></div>
@@ -135,7 +144,17 @@
     <script src="{{ asset('assets-admin/js/vendors.min.js') }}"></script>
     <script src="{{ asset('assets-admin/js/pages/chat-popup.js') }}"></script>
     <script src="{{ asset('assets-admin/icons/feather-icons/feather.min.js') }}"></script>
-
+     <script>
+         import Swal from 'sweetalert2';
+         window.showAlert = function(message, type) {
+             Swal.fire({
+                 icon: type, // 'success', 'error', 'warning', 'info', و ...
+                 title: message,
+                 showConfirmButton: false,
+                 timer: 1500 // زمان نمایش پیغام (میلی‌ثانیه)
+             });
+         };
+     </script>
 
     <!-- Master Admin App -->
     <script src="{{ asset('assets-admin/js/template.js') }}"></script>

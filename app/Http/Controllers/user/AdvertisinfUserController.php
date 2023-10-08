@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAdvertisingRequest;
 use App\Models\Advertising;
 use App\Models\Category;
 use App\Models\User;
@@ -48,7 +49,7 @@ class AdvertisinfUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdvertisingRequest $request)
     {
         $picture_url= Storage::putFile('advertise',$request->picture_url);
 //        if (!Gate::allows('check-permission')) {
