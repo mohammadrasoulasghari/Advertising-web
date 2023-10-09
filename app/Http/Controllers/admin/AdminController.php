@@ -14,22 +14,13 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    private $advertising;
-    private  $category;
-    private $plan;
-    private $user;
+    public function __construct(private AdvertisingsRepository $advertising,private CategoryRepository $category, private PlanRepository $plan, private UserRepositories $user){
 
-    public function __construct(AdvertisingsRepository $advertising,CategoryRepository $category,PlanRepository $plan,UserRepositories $user)
-    {
-        $this->advertising=$advertising;
-        $this->category=$category;
-        $this->plan=$plan;
-        $this->user=$user;
     }
 
     public function indexPage()
     {
-        $adversting = Advertising::all();
+        $adversting = $this->advertising->all();
         return view('panel-admin.category.panel', compact('adversting'));
     }
     public function addCategory(CategoryRepository $category)

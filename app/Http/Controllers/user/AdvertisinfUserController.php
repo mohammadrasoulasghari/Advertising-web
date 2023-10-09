@@ -8,7 +8,10 @@ use App\Models\Advertising;
 use App\Models\Category;
 use App\Models\User;
 use App\Repositories\AdvertisingsRepository;
+use App\Repositories\UserRepositories;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,12 +19,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AdvertisinfUserController extends Controller
 {
-    private $advertising;
 
 
-    public function __construct(AdvertisingsRepository $advertising)
+    public function __construct(private AdvertisingsRepository $advertising,private UserRepositories $user)
     {
-        $this->advertising=$advertising;
     }
 
     /**
@@ -60,6 +61,8 @@ class AdvertisinfUserController extends Controller
      */
     public function store(StoreAdvertisingRequest $request)
     {
+        $picture_url= Storage::putFile('advertise',$request->picture_url);
+
         $data=[
             'name'=> $request->name,
             'description' =>$request->description,
@@ -68,13 +71,15 @@ class AdvertisinfUserController extends Controller
             'category_id' =>$request->category_id,
             'picture_url' =>$picture_url
         ];
-        $picture_url= Storage::putFile('advertise',$request->picture_url);
 //        if (!Gate::allows('check-permission')) {
 //            $request->merge([
 //                'picture_url' => $picture_url
 //            ]);
+        $user=Auth::user();
+        dd($user);
              $this->advertising->create($data);
-            return redirect(route('advertising.create'))->with('alert', 'successss');
+            $user->update(['last_free_post_submission' => now()]);
+            return redirect()->route('advertising.create');
         }
 
 

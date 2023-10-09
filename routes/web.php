@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAdvertisingLimitForUsers;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -137,7 +138,11 @@ Route::middleware('auth')->group(function () {
                  Route::get('/check2', [CheckOutController::class, 'verify'])->name('checkout.verify');
 });
 
-
+Route::middleware([CheckAdvertisingLimitForUsers::class])->group(function (){
+    Route::get('test1',function (){
+        return 'now';
+    });
+});
 require __DIR__ . '/auth.php';
 Route::get('/dashboard', function () {
                  return view('dashboard');

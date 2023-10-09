@@ -4,17 +4,20 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Requests\StoreAdvertisingRequest;
 use App\Models\Advertising;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use function Pest\version;
 
 class AdvertisingController extends Controller
 {
     public function store(StoreAdvertisingRequest $request)
     {
-
+        dd(Advertising::countAdvrtisingInCurrentShamsiMonth());
         Advertising::create($request->all());
-        return redirect(route('add.adversting'))->with('alert', 'successss');
+        return redirect(route('add.adversting'))->with('alert', 'successes');
     }
     public function update(Request $request, Advertising $advertising)
     {

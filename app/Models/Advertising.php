@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
+use Morilog\Jalali\Jalalian;
 
 /**
  * @method static create(array $all)
@@ -18,7 +19,7 @@ class Advertising extends Model
 {
     use HasFactory;
 
-    public static function paginate(int $int)
+        public static function paginate(int $int)
     {
     }
 
@@ -28,7 +29,7 @@ class Advertising extends Model
     }
     protected $fillable = ['name', 'description', 'slug', 'phone_number', 'picture_url', 'category_id', 'user_id'];
 
-    public function getCreatedAtAttribute($value)
+    public function getCreatedAtInHumanAttribute($value)
     {
         return (new Verta($value))->formatDifference(\verta());
     }
@@ -40,8 +41,5 @@ class Advertising extends Model
 
         return $query;
     }
-//     public function getPictureUrlAttribute()
-//     {
-//         return  '/storage' . $this->picture_url;
-//     }
+
 }

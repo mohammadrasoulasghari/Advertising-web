@@ -25,6 +25,7 @@ abstract class Repository
 
     public function create(array $data)
     {
+        info('test',$data);
         return $this->model->create($data);
     }
 

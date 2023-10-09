@@ -238,7 +238,7 @@
                                                     <a href="blog-details.html"><img
                                                             src="{{asset('storage/advertise/'.$advertise->picture_url)}}" alt=""></a>
                                                     <a href="blog.html"
-                                                        class="tag tag-two">{{ $advertise->created_at }}</a>
+                                                        class="tag tag-two">{{ $advertise->created_at_in_human }}</a>
                                                 </div>
                                                 <div class="blog-post-content-two">
                                                     <h2 class="title"><a
@@ -291,7 +291,7 @@
                                         <ul class="list-wrap">
                                             @foreach ($categories as $category)
                                                 <li><a
-                                                        href="{{ route('show.category.post', $category->id) }}">{{ $category->name }}<span>(02)</span></a>
+                                                        href="{{ route('show.category.post', $category->id) }}">{{ $category->name }}</a>
                                                 </li>
                                             @endforeach
                                     </div>
