@@ -27,7 +27,6 @@ class PayDriver implements PaymentDriver
                 'redirect_url' => 'https://pay.ir/pg/' . $result['token'],
             ]);
         } else {
-            //TODO log error message in tracking error tools
             return collect([
                 'status' => false,
                 'message' => $result['errorMessage'],

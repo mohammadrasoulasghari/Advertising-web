@@ -13,9 +13,9 @@ abstract class Repository
     }
     abstract public function model();
 
-    public function all($limit=4)
+    public function paginate($limit=4)
     {
-        return $this->model->orderBy('id', 'desc')->paginate($limit);
+        return $this->model->paginate($limit);
     }
 
     public function find($id)

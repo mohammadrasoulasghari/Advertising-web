@@ -20,17 +20,17 @@ class AdminController extends Controller
 
     public function indexPage()
     {
-        $adversting = $this->advertising->all();
+        $adversting = $this->advertising->paginate();
         return view('panel-admin.category.panel', compact('adversting'));
     }
     public function addCategory(CategoryRepository $category)
     {
-        $categories = $this->category->all();
+        $categories = $this->category->paginate();
         return view('panel-admin.category.add-category', compact('categories'));
     }
     public function ShowdeleteCategoryPage()
     {
-        $categories = $this->category->all();
+        $categories = $this->category->paginate();
         return view('panel-admin.category.delete-category', compact('categories'));
     }
     public function showEditCategoryPage(Request $request, Category $category)
@@ -41,24 +41,24 @@ class AdminController extends Controller
     public function addAdversting()
     {
         $user_id = auth()->user()->id;
-        $categories = $this->category->all();
+        $categories = $this->category->paginate();
         return view('panel-admin.adversting.add-adversting', compact('categories', 'user_id'));
     }
     public function showDeleteAdverstingPage()
     {
-        $adversting =$this->category->all();
+        $adversting =$this->category->paginate();
         return view('panel-admin.adversting.delete-adversting', compact('adversting'));
     }
     public function showEditAdverstingPage(Request $request, Advertising $adversting)
     {
         $adversting = $this->advertising->find($adversting->id);
-        $categories = $this->category->all();
+        $categories = $this->category->paginate();
         $user_id = auth()->user()->id;
         return view('panel-admin.adversting.edit-adversting', compact('adversting', 'categories', 'user_id'));
     }
     public function listUsers()
     {
-        $users = $this->user->all();
+        $users = $this->user->paginate();
         return view('panel-admin.users.list-users', compact('users'));
     }
     public function showEditUsersPage(User $user)

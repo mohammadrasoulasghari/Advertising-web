@@ -38,6 +38,7 @@ class CheckOutController extends Controller
         if ($result->get('status')) {
             return redirect()->secure($result->get('redirect_url'));
         } else {
+
             return back()->withErrors($result->get('message'));
         }
     }
@@ -52,7 +53,7 @@ class CheckOutController extends Controller
             return back()->withErrors('خطایی رخ داده است');
         }
 
-        $servicePayment = new PaymentService(new PayDriver());
+        $servicePayment = new PaymentService(new IdPayDriver());
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
             $permission = $result->get('data')['permission'];

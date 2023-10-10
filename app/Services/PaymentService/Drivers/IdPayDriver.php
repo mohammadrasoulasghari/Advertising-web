@@ -13,37 +13,42 @@ use Symfony\Component\Mailer\Exception\HttpTransportException;
 class IdPayDriver implements PaymentDriver
 {
 
-    public function pay(Authenticatable|User $user, int $amount = 10000, Collection|null $additionalData)
+    public function pay(Authenticatable|User $user, int $amount , Collection|null $additionalData)
     {
         $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
             'X-SANDBOX' => '1',
         ])->post('https://api.idpay.ir/v1.1/payment', [
-            'order_id' => '101',
-            'amount' => '10000',
+
+            'order_id' => '3',
+            'amount' => $amount,
             'callback' => route('checkout.verify', $additionalData->toArray())
         ]);
         $result = $result->json();
-        $params = [
-            'id' => $result['id'],
-            'order_id' => '101',
-        ];
-        $redirect = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
-            'X-SANDBOX' => '1',
-        ])->post('https://api.idpay.ir/v1.1/payment/verify');
-        dd($redirect);
-        if ($result['id']) {
+         if ($result  ['id']){
             return collect([
                 'status' => true,
-                'redirect_url' => $redirect,
+                'redirect_url' =>$result['link'],
+
             ]);
+
+         }
+
+
+
+
         }
-    }
 
-
-    public function verify(Authenticatable|User $user, array $data)
+    public function verify(User|Authenticatable $user, array $data)
     {
+        $result= Http::withHeaders([
+            'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
+            'X-SANDBOX' => '1',
+        ])->post('https://api.idpay.ir/v1.1/payment/verify',[
+            'id'=> $data['id'],
+            'order_id' =>$data['order_id']
+        ]);
+        dd($result);
+        // TODO: Implement verify() method.
     }
 }
