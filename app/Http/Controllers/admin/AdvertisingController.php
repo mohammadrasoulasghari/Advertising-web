@@ -15,7 +15,6 @@ class AdvertisingController extends Controller
 {
     public function store(StoreAdvertisingRequest $request)
     {
-        dd(Advertising::countAdvrtisingInCurrentShamsiMonth());
         Advertising::create($request->all());
         return redirect(route('add.adversting'))->with('alert', 'successes');
     }

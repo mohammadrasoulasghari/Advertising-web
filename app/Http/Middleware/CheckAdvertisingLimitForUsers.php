@@ -20,13 +20,16 @@ class CheckAdvertisingLimitForUsers
      */
     public function handle(Request $request, Closure $next)
     {
-        $firstDay= \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-01')))->toCarbon()->format('Y-m-d')  ;
-        $today= \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-d')))->toCarbon()->format('Y-m-d');
-        $postCount= DB::table('advertisings')->whereDate('created_at','>=',$firstDay)->whereDate('created_at','<=',$today)->count();
+        dd('saaa');
+//        $user=$request->user();
+//        dd($user);
+        //$firstDay= \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-01')))->toCarbon()->format('Y-m-d')  ;
+       // $today= \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-d')))->toCarbon()->format('Y-m-d');
+//        $postCount= DB::table('advertisings')->whereDate('created_at','>=',$firstDay)->whereDate('created_at','<=',$today)->where('user_id',$user->id)->count();
+//          dd($postCount);
+//       if (!$user->permission ==0 && $postCount)
 
-       dd($postCount);
 
-
-        return $next($request);
+//        return $next($request);
     }
 }

@@ -69,6 +69,7 @@ class AdvertisinfUserController extends Controller
             'slug' => $request->slug,
             'phone_number' =>$request->phone_number,
             'category_id' =>$request->category_id,
+            'user_id' => $request->user_id,
             'picture_url' =>$picture_url
         ];
 //        if (!Gate::allows('check-permission')) {
@@ -76,7 +77,6 @@ class AdvertisinfUserController extends Controller
 //                'picture_url' => $picture_url
 //            ]);
         $user=Auth::user();
-        dd($user);
              $this->advertising->create($data);
             $user->update(['last_free_post_submission' => now()]);
             return redirect()->route('advertising.create');

@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckAdvertisingLimitForUsers;
 use App\Mail\VerifyEmail;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -38,7 +39,7 @@ use App\Http\Controllers\user\AdvertisinfUserController;
 
 Route::get('/', [indexController::class, 'index'])->name('index');
 Route::get('advertisings', [indexController::class, 'showAdvertisings'])->name('showAdvertisings'); // Route::get('/admin', [adminController::class, 'indexPage']);
-Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(function () {
+Route::prefix('/admin')->middleware('CheckPermissionAdmin')->group(function () {
                  Route::get('/index', [AdminController::class, 'indexPage'])->name('index.page');
 
                  //  create category
@@ -90,14 +91,16 @@ Route::prefix('/admin')->middleware([CheckPermissionAdmin::class])->group(functi
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
                  // index
                  Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
                  // index
 
                  // crete advertising for user
-                 Route::get('/advertising/create', [AdvertisinfUserController::class, 'create'])->name('advertising.create');
-                 Route::post('/create-adversting', [AdvertisinfUserController::class, 'store'])->name('store.adversting.user');
+    Route::middleware(['CheckPermissionAdmin'])->group(function (){
+        Route::get('/advertising/create', [AdvertisinfUserController::class, 'create'])->name('advertising.create');
+        Route::post('/create-adversting', [AdvertisinfUserController::class, 'store'])->name('store.adversting.user');
+    });
                  // crete advertising for user
 
                  // Show Advertising and delete , edit button
@@ -137,14 +140,18 @@ Route::middleware('auth')->group(function () {
                  // });
                  Route::get('/check2', [CheckOutController::class, 'verify'])->name('checkout.verify');
 });
-
-Route::middleware([CheckAdvertisingLimitForUsers::class])->group(function (){
-    Route::get('test1',function (){
-        return 'now';
-    });
+Route::get('te',function (){
+   dd('this is a simple route');
 });
+//Route::group(function (){
+//    Route::get('test1',function (){
+////        dd(auth()->user());
+//        return 'now';
+//    });
+//    });
 require __DIR__ . '/auth.php';
 Route::get('/dashboard', function () {
+
                  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
