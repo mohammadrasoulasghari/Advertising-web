@@ -17,7 +17,7 @@ class IdPayDriver implements PaymentDriver
     {
         $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
-            'X-SANDBOX' => '9',
+            'X-SANDBOX' => '1',
         ])->post('https://api.idpay.ir/v1.1/payment', [
 
             'order_id' => rand(),
@@ -43,7 +43,6 @@ class IdPayDriver implements PaymentDriver
             'id' => $data['id'],
             'order_id' => $data['order_id']
         ]);
-        dd($result['status']);
         if (isset($result)) {
             if ($result['status'] == 200) {
                 return collect([

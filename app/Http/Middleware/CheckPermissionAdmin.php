@@ -26,7 +26,7 @@ class CheckPermissionAdmin
         $postCount = DB::table('advertisings')->where('user_id', $user->id)->count();
         if (!$user->permission == 0 && $postCountDate  >= 1 && $user->permission == 4) {
             return  abort(403, 'تعداد پست های رایگان شما به پایان رسید لطفا نسبت به تهیه اشراک اقدام کنید');
-        } elseif ($user->permission >= $postCount) {
+        } elseif ($user->permission <= $postCount) {
             dd('test');
             return  abort(403, 'اشتراک شما به پایان رسید لطفا نسبت به تهیه اشتراک جدید اقدام فرمایید    ');
         } else {

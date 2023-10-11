@@ -12,7 +12,7 @@
     <form action="{{ route('checkout.pay') }}" method="POST">
         @csrf
         <select name="type_payment" id="">
-            <option value="zarinpal">زرین پال</option>
+            <option value="idpay">id pay</option>
             <option value="pay">pay.ir</option>
         </select>
         <input type="hidden" name="permission" value="{{$plan->permission}}">

@@ -12,4 +12,5 @@ interface PaymentDriver
     public function pay(Authenticatable|User $user, int $amount, Collection|null $additionalData);
 
     public function verify(Authenticatable|User $user, array $data);
+
 }

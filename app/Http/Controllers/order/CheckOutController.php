@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\order;
 
+use App\Services\typePayment;
 use zarinpal;
 use App\Models\Plan;
 use App\Models\User;
@@ -23,12 +24,13 @@ class CheckOutController extends Controller
     }
     public function pay(Request $request)
     {
+        $gateway=new typePayment();
         $user = auth()->user();
         $amount = (int) $request->amount;
         $plan_id = (int) $request->planId;
         $type_permission = $request->permission;
-        $type_payment = $request->input('type_payment') == 'pay' ? new PayDriver() : new IdPayDriver();
-        $servicePayment = new PaymentService(new PayDriver());
+        $type_payment = $gateway->typePayment($request->input('type_payment'));
+        $servicePayment = new PaymentService($type_payment);
         $result = $servicePayment->payment($user, $amount, collect([
             'permission' => $type_permission,
             'amount' => $amount,
@@ -45,7 +47,8 @@ class CheckOutController extends Controller
 
     public function verify(Request $request, User $user, orders $orders)
     {
-        $type_payment = $request->input('type_payment') == 'zarinpal' ? new ZarinDriver : new PayDriver();
+        $gateway=new typePayment();
+        $type_payment = $gateway->typePayment($request->input('type_payment'));
         $user = auth()->user();
 
         if (!$request->status == 1) {
