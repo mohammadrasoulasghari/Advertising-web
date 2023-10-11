@@ -2,11 +2,13 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\App;
+
 abstract class Repository
 {
     protected $model;
     // ...
-
+// Unhandled \Illuminate\Contracts\Container\BindingResolutionException
     public function __construct()
     {
         $this->model = app($this->model());

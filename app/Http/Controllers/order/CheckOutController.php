@@ -53,7 +53,7 @@ class CheckOutController extends Controller
         $gateway=new typePayment();
         $type_payment = $gateway->typePayment($request->type_payment);
         $user = auth()->user();
-        if (!$request->status == 1) {
+        if ($request->status != 1) {
             dd('Invalid');
             return back()->withErrors('خطایی رخ داده است');
         }

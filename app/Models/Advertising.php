@@ -19,9 +19,6 @@ class Advertising extends Model
 {
     use HasFactory;
 
-        public static function paginate(int $int)
-    {
-    }
 
     public function user()
     {

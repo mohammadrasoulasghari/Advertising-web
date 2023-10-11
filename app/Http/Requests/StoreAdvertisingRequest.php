@@ -27,7 +27,7 @@ class StoreAdvertisingRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'slug' => 'required|string|max:255|unique:advertisings',
-            'phone_number' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:11',
             'picture_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required|exists:categories,id',
             'user_id' => 'required|integer',
