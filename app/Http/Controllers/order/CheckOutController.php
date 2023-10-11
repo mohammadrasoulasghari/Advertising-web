@@ -28,7 +28,7 @@ class CheckOutController extends Controller
         $plan_id = (int) $request->planId;
         $type_permission = $request->permission;
         $type_payment = $request->input('type_payment') == 'pay' ? new PayDriver() : new IdPayDriver();
-        $servicePayment = new PaymentService(new IdPayDriver());
+        $servicePayment = new PaymentService(new PayDriver());
         $result = $servicePayment->payment($user, $amount, collect([
             'permission' => $type_permission,
             'amount' => $amount,
@@ -53,7 +53,7 @@ class CheckOutController extends Controller
             return back()->withErrors('خطایی رخ داده است');
         }
 
-        $servicePayment = new PaymentService(new IdPayDriver());
+        $servicePayment = new PaymentService(new PayDriver());
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
             $permission = $result->get('data')['permission'];

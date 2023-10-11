@@ -13,42 +13,59 @@ use Symfony\Component\Mailer\Exception\HttpTransportException;
 class IdPayDriver implements PaymentDriver
 {
 
-    public function pay(Authenticatable|User $user, int $amount , Collection|null $additionalData)
+    public function pay(Authenticatable|User $user, int $amount, Collection|null $additionalData)
     {
         $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
-            'X-SANDBOX' => '1',
+            'X-SANDBOX' => '9',
         ])->post('https://api.idpay.ir/v1.1/payment', [
 
-            'order_id' => '3',
+            'order_id' => rand(),
             'amount' => $amount,
             'callback' => route('checkout.verify', $additionalData->toArray())
         ]);
         $result = $result->json();
-         if ($result  ['id']){
+        if ($result['id']) {
             return collect([
                 'status' => true,
-                'redirect_url' =>$result['link'],
+                'redirect_url' => $result['link'],
 
             ]);
-
-         }
-
-
-
-
         }
+    }
 
     public function verify(User|Authenticatable $user, array $data)
     {
-        $result= Http::withHeaders([
+        $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
             'X-SANDBOX' => '1',
-        ])->post('https://api.idpay.ir/v1.1/payment/verify',[
-            'id'=> $data['id'],
-            'order_id' =>$data['order_id']
+        ])->post('https://api.idpay.ir/v1.1/payment/verify', [
+            'id' => $data['id'],
+            'order_id' => $data['order_id']
         ]);
-        dd($result);
-        // TODO: Implement verify() method.
+        dd($result['status']);
+        if (isset($result)) {
+            if ($result['status'] == 200) {
+                return collect([
+                    'status' => true,
+                    'data' => [
+                        'permission' => $data['permission'],
+                        'amount' => $data['amount'],
+                        'plan_id' => $data['plan_id']
+                    ],
+                    'message' => 'عملیات موفقیت آمیز بود'
+                ]);
+            } else {
+                return collect([
+                    'status' => false,
+                    'message' => 'تراکنش با خطا مواجه شد'
+                ]);
+            }
+        } else {
+            return collect([
+                'status' => false,
+                'message' => 'خطایی رخ داده است'
+            ]);
+        }
     }
 }

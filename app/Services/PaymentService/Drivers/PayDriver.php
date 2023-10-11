@@ -44,7 +44,7 @@ class PayDriver implements PaymentDriver
         if (isset($result['status'])) {
             if ($result['status'] == 1) {
 
-                //TODO check permission number by price payment
+                //TODO check permission number by price paymentP
                 return collect([
                     'status' => true,
                     'data' => [
