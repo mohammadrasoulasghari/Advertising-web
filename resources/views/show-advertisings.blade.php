@@ -231,14 +231,14 @@
                         <div class="col-71">
                             <div class="blog-post-wrap">
                                 <div class="row">
-                                    @foreach ($advertisingsShow as $advertise)
+                                    @foreach ($advertisings as $advertise)
                                         <div class="col-md-6">
                                             <div class="blog-post-item-two">
                                                 <div class="blog-post-thumb-two">
                                                     <a href="blog-details.html"><img
                                                             src="{{asset('storage/advertise/'.$advertise->picture_url)}}" alt=""></a>
                                                     <a href="blog.html"
-                                                        class="tag tag-two">{{ $advertise->created_at_in_human }}</a>
+                                                        class="tag tag-two">{{$advertise->created_at}}</a>
                                                 </div>
                                                 <div class="blog-post-content-two">
                                                     <h2 class="title"><a

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\order;
 
 use App\Services\typePayment;
+use Dflydev\DotAccessData\Data;
 use zarinpal;
 use App\Models\Plan;
 use App\Models\User;
@@ -26,7 +27,7 @@ class CheckOutController extends Controller
     {
         $gateway=new typePayment();
         $user = auth()->user();
-        $amount = (int) $request->amount;
+        $amount = (int) $request->amount*10;
         $plan_id = (int) $request->planId;
         $type_permission = $request->permission;
         $type_payment = $gateway->typePayment($request->input('type_payment'));
@@ -35,6 +36,7 @@ class CheckOutController extends Controller
             'permission' => $type_permission,
             'amount' => $amount,
             'plan_id' => $plan_id,
+            'type_payment' =>$request->input('type_payment')
         ]));
 
         if ($result->get('status')) {
@@ -47,16 +49,15 @@ class CheckOutController extends Controller
 
     public function verify(Request $request, User $user, orders $orders)
     {
-        $gateway=new typePayment();
-        $type_payment = $gateway->typePayment($request->input('type_payment'));
-        $user = auth()->user();
 
+        $gateway=new typePayment();
+        $type_payment = $gateway->typePayment($request->type_payment);
+        $user = auth()->user();
         if (!$request->status == 1) {
             dd('Invalid');
             return back()->withErrors('خطایی رخ داده است');
         }
-
-        $servicePayment = new PaymentService(new PayDriver());
+        $servicePayment = new PaymentService($type_payment);
         $result = $servicePayment->verify($user, $request->all());
         if ($result->get('status')) {
             $permission = $result->get('data')['permission'];

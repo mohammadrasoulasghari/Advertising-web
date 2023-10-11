@@ -138,7 +138,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::get('/checkout/auth', function () {
     // });
-    Route::get('/check2', [CheckOutController::class, 'verify'])->name('checkout.verify');
+    Route::get('/verify/pay', [CheckOutController::class, 'verify'])->name('checkout.verify.pay');
+    Route::post('/verify/idpay', [CheckOutController::class, 'verify'])->name('checkout.verify.idpay');
+
 });
 Route::get('te', function () {
     dd('this is a simple route');

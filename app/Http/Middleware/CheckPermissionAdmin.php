@@ -23,6 +23,7 @@ class CheckPermissionAdmin
         $firstDay = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-01')))->toCarbon()->format('Y-m-d');
         $today = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', (Jalalian::now()->format('Y-m-d')))->toCarbon()->format('Y-m-d');
         $postCountDate = DB::table('advertisings')->whereDate('created_at', '>=', $firstDay)->whereDate('created_at', '<=', $today)->where('user_id', $user->id)->count();
+//        $postCountDate = DB::table('advertisings')->whereDate('created_at', '>=', $firstDay->where('user_id', $user->id)->count());   type 2
         $postCount = DB::table('advertisings')->where('user_id', $user->id)->count();
         if (!$user->permission == 0 && $postCountDate  >= 1 && $user->permission == 4) {
             return  abort(403, 'تعداد پست های رایگان شما به پایان رسید لطفا نسبت به تهیه اشراک اقدام کنید');

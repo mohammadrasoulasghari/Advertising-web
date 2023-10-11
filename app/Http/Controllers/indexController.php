@@ -6,22 +6,19 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Models\Category;
 use App\Models\Advertising;
+use App\Models\User;
 use App\Repositories\AdvertisingsRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\PlanRepository;
+use App\Repositories\UserRepositories;
 use Illuminate\Http\Request;
 
 class indexController extends Controller
 {
-    private $advertising;
-    private  $category;
-    private $plan;
-    public function __construct(AdvertisingsRepository $advertising, CategoryRepository $category, PlanRepository $plan)
-    {
-        $this->advertising = $advertising;
-        $this->category = $category;
-        $this->plan = $plan;
+    public function __construct(private AdvertisingsRepository $advertising,private CategoryRepository $category, private PlanRepository $plan, private UserRepositories $user){
+
     }
+
 
     public function index()
     {
@@ -33,16 +30,16 @@ class indexController extends Controller
     }
     public function showAdvertisings(Request $request)
     {
-        $advertisingsShow = $this->advertising->paginate();
+        $advertisings = $this->advertising->paginate();
         $filters = $request->only('search');
         $advertisings = Advertising::filterr($filters)->get();
         $categories = $this->category->paginate();
-        return view('show-advertisings', compact('advertisings', 'categories', 'advertisingsShow'));
+        return view('show-advertisings', compact('advertisings', 'categories', 'advertisings'));
     }
-    public function showCategoryPost(Request $request)
+    public function showCategoryPost(Request $request,Category $category)
     {
         $filters = $request->only('search');
-        $advertisings = $this->advertising->paginate(1);
-        return view('show-categories', compact('advertisings'));
+        $advertising = Advertising::all()->where('category_id',$category->id);
+        return view('show-categories', compact('advertising'));
     }
 }

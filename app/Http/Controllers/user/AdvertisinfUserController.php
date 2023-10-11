@@ -79,7 +79,7 @@ class AdvertisinfUserController extends Controller
         $user=Auth::user();
              $this->advertising->create($data);
             $user->update(['last_free_post_submission' => now()]);
-            return redirect()->route('advertising.create');
+            return redirect()->route('advertising.show.list');
         }
 
 

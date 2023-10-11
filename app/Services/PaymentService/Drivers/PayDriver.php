@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Http;
 
 class PayDriver implements PaymentDriver
 {
+
     public function pay(Authenticatable|User $user, int $amount, Collection|null $additionalData): Collection
     {
         $result = Http::post('https://pay.ir/pg/send', [
             'api'          => config('payment.drivers.pay.api_key'),
             'amount'       => $amount,
-            'redirect'     => route('checkout.verify', $additionalData->toArray()),
+            'redirect'     => route('checkout.verify.pay', $additionalData->toArray()),
         ]);
 
         $result = $result->json();
@@ -50,7 +51,8 @@ class PayDriver implements PaymentDriver
                     'data' => [
                         'permission' => $data['permission'],
                         'amount' => $data['amount'],
-                        'plan_id' => $data['plan_id']
+                        'plan_id' => $data['plan_id'],
+                        'type_payment' =>$data['type_payment']
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

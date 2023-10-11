@@ -16,7 +16,7 @@ class AdvertisingController extends Controller
     public function store(StoreAdvertisingRequest $request)
     {
         Advertising::create($request->all());
-        return redirect(route('add.adversting'))->with('alert', 'successes');
+        return redirect(route('advertising.show.list'));
     }
     public function update(Request $request, Advertising $advertising)
     {

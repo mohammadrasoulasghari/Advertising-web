@@ -17,12 +17,12 @@ class IdPayDriver implements PaymentDriver
     {
         $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
-            'X-SANDBOX' => '1',
+            'X-SANDBOX' => true,
         ])->post('https://api.idpay.ir/v1.1/payment', [
 
             'order_id' => rand(),
             'amount' => $amount,
-            'callback' => route('checkout.verify', $additionalData->toArray())
+            'callback' => route('checkout.verify.idpay', $additionalData->toArray())
         ]);
         $result = $result->json();
         if ($result['id']) {
@@ -38,19 +38,21 @@ class IdPayDriver implements PaymentDriver
     {
         $result = Http::withHeaders([
             'X-API-KEY' => '6a7f99eb-7c20-4412-a972-6dfb7cd253a4',
-            'X-SANDBOX' => '1',
+            'X-SANDBOX' => true,
         ])->post('https://api.idpay.ir/v1.1/payment/verify', [
             'id' => $data['id'],
             'order_id' => $data['order_id']
         ]);
-        if (isset($result)) {
-            if ($result['status'] == 200) {
+        if (isset($result['status'])) {
+            if ($result['status'] == 100) {
+
                 return collect([
                     'status' => true,
                     'data' => [
                         'permission' => $data['permission'],
                         'amount' => $data['amount'],
-                        'plan_id' => $data['plan_id']
+                        'plan_id' => $data['plan_id'],
+                        'type_payment' =>$data['type_payment']
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

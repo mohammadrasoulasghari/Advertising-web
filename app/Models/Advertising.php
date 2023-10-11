@@ -29,7 +29,7 @@ class Advertising extends Model
     }
     protected $fillable = ['name', 'description', 'slug', 'phone_number', 'picture_url', 'category_id', 'user_id'];
 
-    public function getCreatedAtInHumanAttribute($value)
+    public function getCreatedAtAttribute($value)
     {
         return (new Verta($value))->formatDifference(\verta());
     }
