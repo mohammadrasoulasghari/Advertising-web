@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\order;
 
+use App\Http\Requests\PayRequest;
 use App\Services\typePayment;
 use Dflydev\DotAccessData\Data;
 use zarinpal;
@@ -23,21 +24,19 @@ class CheckOutController extends Controller
         $plan = Plan::find($plan->id);
         return view('pay.factor', compact('plan'));
     }
-    public function pay(Request $request)
+    public function pay(PayRequest $request)
     {
-        $gateway=new typePayment();
+        $plan=Plan::find($request->plan_id);
         $user = auth()->user();
-        $amount = (int) $request->amount*10;
-        $plan_id = (int) $request->planId;
-        $type_permission = $request->permission;
-        $type_payment = $gateway->typePayment($request->input('type_payment'));
-        $servicePayment = new PaymentService($type_payment);
-        $result = $servicePayment->payment($user, $amount, collect([
-            'permission' => $type_permission,
-            'amount' => $amount,
-            'plan_id' => $plan_id,
-            'type_payment' =>$request->input('type_payment')
+        $servicePayment = new PaymentService();
+        $result= $servicePayment->driver($request->input('type_payment'))->pay($user, $plan->price*10, collect([
+            'permission' => $plan->permission,
+            'plan_id' => $plan->id,
+            'amount' =>$plan->price*10,
+            'driver' => $request->input('type_payment')
         ]));
+//        $result= $servicePayment->driver($request->input('type_payment'))->pay( $plan->price*10,'');
+
 
         if ($result->get('status')) {
             return redirect()->secure($result->get('redirect_url'));
@@ -49,16 +48,16 @@ class CheckOutController extends Controller
 
     public function verify(Request $request, User $user, orders $orders)
     {
-
-        $gateway=new typePayment();
-        $type_payment = $gateway->typePayment($request->type_payment);
+//        $gateway=new typePayment();
+//        $type_payment = $gateway->typePayment($request->driver);
         $user = auth()->user();
-        if ($request->status != 1) {
+        if (!$request->status = 1) {
             dd('Invalid');
             return back()->withErrors('خطایی رخ داده است');
         }
-        $servicePayment = new PaymentService($type_payment);
-        $result = $servicePayment->verify($user, $request->all());
+        $servicePayment = new PaymentService();
+
+        $result = $servicePayment->driver($request->driver)->verify($user, $request->all());
         if ($result->get('status')) {
             $permission = $result->get('data')['permission'];
             $amount = $result->get('data')['amount'];

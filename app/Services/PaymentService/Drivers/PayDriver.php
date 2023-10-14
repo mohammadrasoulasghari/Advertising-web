@@ -52,7 +52,7 @@ class PayDriver implements PaymentDriver
                         'permission' => $data['permission'],
                         'amount' => $data['amount'],
                         'plan_id' => $data['plan_id'],
-                        'type_payment' =>$data['type_payment']
+                        'type_payment' =>$data['driver']
                     ],
                     'message' => 'عملیات موفقیت آمیز بود'
                 ]);

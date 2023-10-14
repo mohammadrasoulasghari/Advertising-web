@@ -15,9 +15,7 @@
             <option value="idpay">id pay</option>
             <option value="pay">pay.ir</option>
         </select>
-        <input type="hidden" name="permission" value="{{$plan->permission}}">
-        <input type="hidden" name="amount" value="{{$plan->price}}">
-        <input type="hidden" name="planId" value="{{$plan->id}}">
+        <input type="hidden" name="plan_id" value="{{$plan->id}}">
 
 
         {{ $plan->name }}
