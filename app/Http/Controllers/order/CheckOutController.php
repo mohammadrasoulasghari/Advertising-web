@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\order;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PayRequest;
-use App\Services\typePayment;
-use Dflydev\DotAccessData\Data;
-use zarinpal;
+use App\Models\orders;
 use App\Models\Plan;
 use App\Models\User;
-use App\Models\orders;
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Services\PaymentService\Drivers\PayDriver;
-use App\Services\PaymentService\Drivers\IdPayDriver;
 use App\Services\PaymentService\Core\PaymentService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
+use zarinpal;
 
 class CheckOutController extends Controller
 {
@@ -24,22 +21,28 @@ class CheckOutController extends Controller
         $plan = Plan::find($plan->id);
         return view('pay.factor', compact('plan'));
     }
+
     public function pay(PayRequest $request)
     {
-        $plan=Plan::find($request->plan_id);
+
+        $plan = Plan::find($request->plan_id);
         $user = auth()->user();
         $servicePayment = new PaymentService();
-        $result= $servicePayment->driver($request->input('type_payment'))->pay($user, $plan->price*10, collect([
-            'permission' => $plan->permission,
+
+        $data = [
+            'user_id' => $user->id,
             'plan_id' => $plan->id,
-            'amount' =>$plan->price*10,
+        ];
+        $uuid = Str::uuid();
+
+        info('uuid', [$uuid]);
+        Redis::setex($uuid, 60, json_encode($data));
+        $result = $servicePayment->driver($request->input('type_payment'))->pay($plan->price, [
+            'uuid' => $uuid,
             'driver' => $request->input('type_payment')
-        ]));
-//        $result= $servicePayment->driver($request->input('type_payment'))->pay( $plan->price*10,'');
-
-
+        ]);
         if ($result->get('status')) {
-            return redirect()->secure($result->get('redirect_url'));
+            return redirect()->secure($result->get('order_data')['link']);
         } else {
 
             return back()->withErrors($result->get('message'));
@@ -48,6 +51,8 @@ class CheckOutController extends Controller
 
     public function verify(Request $request, User $user, orders $orders)
     {
+
+        dd($request->all());
 //        $gateway=new typePayment();
 //        $type_payment = $gateway->typePayment($request->driver);
         $user = auth()->user();
@@ -58,6 +63,7 @@ class CheckOutController extends Controller
         $servicePayment = new PaymentService();
 
         $result = $servicePayment->driver($request->driver)->verify($user, $request->all());
+
         if ($result->get('status')) {
             $permission = $result->get('data')['permission'];
             $amount = $result->get('data')['amount'];

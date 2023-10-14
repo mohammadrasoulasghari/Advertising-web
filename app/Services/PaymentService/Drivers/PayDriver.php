@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Http;
 class PayDriver implements PaymentDriver
 {
 
-    public function pay(Authenticatable|User $user, int $amount, Collection|null $additionalData): Collection
+    public function pay($data,$uuid ): Collection
     {
+        dd($data);
         $result = Http::post('https://pay.ir/pg/send', [
             'api'          => config('payment.drivers.pay.api_key'),
             'amount'       => $amount,

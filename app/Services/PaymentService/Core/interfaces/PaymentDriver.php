@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 interface PaymentDriver
 {
-    public function pay(User $user, int $amount, Collection|null $additionalData);
+    public function pay($amount,$uuid);
 
     public function verify(User $user, array $data);
 

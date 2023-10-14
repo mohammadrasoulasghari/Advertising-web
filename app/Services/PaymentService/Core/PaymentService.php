@@ -18,9 +18,9 @@ class PaymentService
         return $this->driver;
     }
 
-    public function pay(Authenticatable|User $user,int $amount, Collection|null $additionalData = null)
+    public function pay($amount,$uuid)
     {
-        return $this->driver->pay($user, $amount, $additionalData);
+        return $this->driver->pay($amount,$uuid);
     }
     public function verify(Authenticatable|User $user, array $data)
     {

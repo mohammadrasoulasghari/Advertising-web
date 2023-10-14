@@ -14,6 +14,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\order\CheckOutController;
 use App\Http\Controllers\admin\AdvertisingController;
 use App\Http\Controllers\user\AdvertisinfUserController;
+use Illuminate\Support\Facades\Redis;
+
 
 
 /*
@@ -142,15 +144,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/verify/idpay', [CheckOutController::class, 'verify'])->name('checkout.verify.idpay');
 
 });
-Route::get('te', function () {
-    dd('this is a simple route');
+//Route::get('te', function () {
+//    dd('this is a simple route');
+//});
+Route::get('test',function (){
+
+//    $data =[
+//        'Driver' => 'pay'
+//    ];
+   return $data = Redis::get('test');
 });
-//Route::group(function (){
-//    Route::get('test1',function (){
-////        dd(auth()->user());
-//        return 'now';
-//    });
-//    });
 require __DIR__ . '/auth.php';
 Route::get('/dashboard', function () {
 
