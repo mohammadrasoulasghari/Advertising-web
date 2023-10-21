@@ -33,7 +33,7 @@ class CheckOutController extends Controller
             'user_id' => $user->id,
             'plan_id' => $plan->id,
         ];
-        $uuid = Str::uuid();
+        $uuid = (string) Str::uuid();
 
         info('uuid', [$uuid]);
         Redis::setex($uuid, 60, json_encode($data));
@@ -51,8 +51,10 @@ class CheckOutController extends Controller
 
     public function verify(Request $request, User $user, orders $orders)
     {
+        dd($request->driver);
+        $data =json_decode(Redis::get($request->uuid),true);
+        $plan =Plan::find($data['plan_id']);
 
-        dd($request->all());
 //        $gateway=new typePayment();
 //        $type_payment = $gateway->typePayment($request->driver);
         $user = auth()->user();
@@ -65,9 +67,9 @@ class CheckOutController extends Controller
         $result = $servicePayment->driver($request->driver)->verify($user, $request->all());
 
         if ($result->get('status')) {
-            $permission = $result->get('data')['permission'];
-            $amount = $result->get('data')['amount'];
-            $planId = $result->get('data')['plan_id'];
+            $permission = $plan->permission;
+            $amount = $plan->price;
+            $planId = $data['plan_id'];
             $user->update(['permission' => $permission]);
             $orders->create([
                 'user_id' => $user->id,
